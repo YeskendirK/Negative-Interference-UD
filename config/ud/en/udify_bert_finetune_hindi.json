@@ -18,7 +18,7 @@
     "validation_data_path": "data/ud-treebanks-v2.3/UD_Hindi-HDTB/hi_hdtb-ud-dev.conllu",
     "test_data_path": "data/ud-treebanks-v2.3/UD_Hindi-HDTB/hi_hdtb-ud-test.conllu",
     "vocabulary": {
-      "directory_path": "data/vocab/english_only_expmix4/vocabulary"
+      "directory_path": "data/vocab/expmix/vocabulary"
     },
     "model": {
       "word_dropout": 0.2,

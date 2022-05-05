@@ -12,10 +12,13 @@ dependencies:
   - matplotlib
   - notebook=6.3.0
   - pip:
-    - conllu
+    - conllu==1.3.1
     - lang2vec
     - allennlp==0.9.0
     - tensorboard==2.7.0
     - tabulate==0.8.9
     - tqdm==4.62.3
     - pillow==8.0.1
+    - overrides==3.1.0
+    - spacy==2.1.9
+    - gevent==1.4.0

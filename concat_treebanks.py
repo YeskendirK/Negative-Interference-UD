@@ -33,9 +33,22 @@ parser.add_argument(
     help="Specify a list of treebanks to use; leave blank to default to all treebanks available",
 )
 
+parser.add_argument("--treebanks_txt", default=None, type=str,
+                    help="path to txt file with treebanks, each line is treebank name")
+
 args = parser.parse_args()
 
-treebanks = util.get_ud_treebank_files(args.dataset_dir, args.treebanks)
+if args.treebanks_txt is None:
+    treebanks_list = args.treebanks
+else:
+    treebanks_list = []
+    with open(args.treebanks_txt, 'r') as file_with_treebanks:
+        lines = file_with_treebanks.readlines()
+        for line in lines:
+            treebank_name = line.strip()
+            treebanks_list.append(treebank_name)
+
+treebanks = util.get_ud_treebank_files(args.dataset_dir, treebanks_list)
 train, dev, test = list(zip(*[treebanks[k] for k in treebanks]))
 
 for treebank, name in zip(
@@ -45,7 +58,7 @@ for treebank, name in zip(
         for t in treebank:
             if not t:
                 continue
-            # with open(t, "r", encoding="utf-8") as read:
-            #     # Unicode hell on Lisa, if this throws an error then just remove it,
-            #     # but watch out with unicode !!!
-            #     shutil.copyfileobj(unicode(read), write)
+            with open(t, "r", encoding="utf-8") as read:
+                # Unicode hell on Lisa, if this throws an error then just remove it,
+                # but watch out with unicode !!!
+                shutil.copyfileobj(read, write)

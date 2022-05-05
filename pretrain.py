@@ -35,7 +35,7 @@ parser.add_argument(
     "--config",
     default="config/ud/en/udify_bert_finetune_hindi.json",
     type=str,
-    nargs="+",
+    # nargs="+",
     help="Overriding configuration files",
 )
 parser.add_argument(

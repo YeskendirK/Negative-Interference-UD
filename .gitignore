@@ -2,6 +2,7 @@ __pycache__/
 
 data/
 logs/
+vocab/
 
 .DS_Store
 idea/

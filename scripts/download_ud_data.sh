@@ -19,7 +19,7 @@ mv ${ARCHIVE} ./data
 
 echo "Generating multilingual dataset..."
 
-mkdir -p "data/ud"
-mkdir -p "data/ud/multilingual"
+mkdir "data/ud"
+mkdir "data/ud/multilingual"
 
-python concat_treebanks.py data/ud/multilingual --dataset_dir ${DATASET_DIR}
+python concat_treebanks.py --output_dir data/ud/multilingual --dataset_dir ${DATASET_DIR}

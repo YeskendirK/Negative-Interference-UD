@@ -45,7 +45,7 @@ for treebank, name in zip(
         for t in treebank:
             if not t:
                 continue
-            with open(t, "r", encoding="utf-8") as read:
-                # Unicode hell on Lisa, if this throws an error then just remove it,
-                # but watch out with unicode !!! 
-                shutil.copyfileobj(unicode(read), write)
+            # with open(t, "r", encoding="utf-8") as read:
+            #     # Unicode hell on Lisa, if this throws an error then just remove it,
+            #     # but watch out with unicode !!!
+            #     shutil.copyfileobj(unicode(read), write)

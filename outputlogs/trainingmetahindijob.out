@@ -1,0 +1,877 @@
+Your label namespace was 'upos'. We recommend you use a namespace ending with 'labels' or 'tags', so we don't add UNK and PAD tokens by default to your vocabulary.  See documentation for `non_padded_namespaces` parameter in Vocabulary.
+Your label namespace was 'xpos'. We recommend you use a namespace ending with 'labels' or 'tags', so we don't add UNK and PAD tokens by default to your vocabulary.  See documentation for `non_padded_namespaces` parameter in Vocabulary.
+Your label namespace was 'feats'. We recommend you use a namespace ending with 'labels' or 'tags', so we don't add UNK and PAD tokens by default to your vocabulary.  See documentation for `non_padded_namespaces` parameter in Vocabulary.
+Your label namespace was 'lemmas'. We recommend you use a namespace ending with 'labels' or 'tags', so we don't add UNK and PAD tokens by default to your vocabulary.  See documentation for `non_padded_namespaces` parameter in Vocabulary.
+/home/lcur1446/.local/lib/python3.8/site-packages/torch/_tensor.py:1104: UserWarning: The .grad attribute of a Tensor that is not a leaf Tensor is being accessed. Its .grad attribute won't be populated during autograd.backward(). If you indeed want the .grad field to be populated for a non-leaf Tensor, use .retain_grad() on the non-leaf Tensor. If you access the non-leaf Tensor by mistake, make sure you access the leaf Tensor instead. See github.com/pytorch/pytorch/pull/30531 for more informations. (Triggered internally at  aten/src/ATen/core/TensorBody.h:475.)
+  return self._grad
+data/ud-treebanks-v2.3/UD_Arabic-PADT/ar_padt-ud-train.conllu
+data/ud-treebanks-v2.3/UD_Czech-PDT/cs_pdt-ud-train.conllu
+data/ud-treebanks-v2.3/UD_Italian-ISDT/it_isdt-ud-train.conllu
+data/ud-treebanks-v2.3/UD_Norwegian-Nynorsk/no_nynorsk-ud-train.conllu
+data/ud-treebanks-v2.3/UD_Russian-SynTagRus/ru_syntagrus-ud-train.conllu
+data/ud-treebanks-v2.3/UD_English-EWT/en_ewt-ud-train.conllu
+0 meta 8.312847137451172
+1 meta 8.210878372192383
+2 meta 8.384344100952148
+3 meta 8.24733829498291
+4 meta 8.557405471801758
+5 meta 9.236651420593262
+6 meta 8.247678756713867
+7 meta 7.788312911987305
+8 meta 7.642535209655762
+9 meta 7.4668684005737305
+10 meta 7.030889511108398
+11 meta 7.173024654388428
+12 meta 6.694543361663818
+13 meta 6.29072904586792
+14 meta 6.271544456481934
+15 meta 5.978583812713623
+16 meta 5.838865280151367
+17 meta 5.723801612854004
+18 meta 5.633657455444336
+19 meta 5.435240745544434
+20 meta 5.531949520111084
+21 meta 5.205631256103516
+22 meta 5.210328102111816
+23 meta 5.225978851318359
+24 meta 5.064651012420654
+25 meta 5.078505992889404
+26 meta 4.687077522277832
+27 meta 4.813096523284912
+28 meta 4.701898574829102
+29 meta 4.7036542892456055
+30 meta 4.537303924560547
+31 meta 4.393476963043213
+32 meta 4.408644676208496
+33 meta 4.332250595092773
+34 meta 4.3089399337768555
+35 meta 4.277449607849121
+36 meta 4.089156150817871
+37 meta 4.130694389343262
+38 meta 3.9513039588928223
+39 meta 3.914537191390991
+40 meta 3.77555513381958
+41 meta 3.760890007019043
+42 meta 3.7274787425994873
+43 meta 3.4133663177490234
+44 meta 3.5086092948913574
+45 meta 3.5075974464416504
+46 meta 3.3867106437683105
+47 meta 3.379972219467163
+48 meta 3.34417724609375
+49 meta 3.0878286361694336
+50 meta 3.0337228775024414
+51 meta 2.9838104248046875
+52 meta 3.106381416320801
+53 meta 2.871459484100342
+54 meta 2.823713779449463
+55 meta 2.6719374656677246
+56 meta 2.8188254833221436
+57 meta 2.6856393814086914
+58 meta 2.5458593368530273
+59 meta 2.4173264503479004
+60 meta 2.55621075630188
+61 meta 2.605647563934326
+62 meta 2.44309139251709
+63 meta 2.5933117866516113
+64 meta 2.5672366619110107
+65 meta 2.533968448638916
+66 meta 2.5432796478271484
+67 meta 2.5499267578125
+68 meta 2.5830001831054688
+69 meta 2.4590518474578857
+70 meta 2.533729314804077
+71 meta 2.587404489517212
+72 meta 2.4794206619262695
+73 meta 2.42446231842041
+74 meta 2.399571657180786
+75 meta 2.2434933185577393
+76 meta 2.2760305404663086
+77 meta 2.1922011375427246
+78 meta 2.464211940765381
+79 meta 2.481834888458252
+80 meta 2.2809739112854004
+81 meta 2.296265125274658
+82 meta 2.490786075592041
+83 meta 2.5818042755126953
+84 meta 2.347156524658203
+85 meta 2.337808132171631
+86 meta 2.3407559394836426
+87 meta 2.389643430709839
+88 meta 2.5573034286499023
+89 meta 2.293689727783203
+90 meta 2.440450429916382
+91 meta 2.4158742427825928
+92 meta 2.314810276031494
+93 meta 2.2856764793395996
+94 meta 2.331298351287842
+95 meta 2.163076162338257
+96 meta 2.537261962890625
+97 meta 2.352787971496582
+98 meta 2.243516683578491
+99 meta 2.1811835765838623
+100 meta 2.396425485610962
+101 meta 2.3238534927368164
+102 meta 2.3526668548583984
+103 meta 2.3437740802764893
+104 meta 2.2694578170776367
+105 meta 2.3194212913513184
+106 meta 2.1882455348968506
+107 meta 2.3171606063842773
+108 meta 2.1610543727874756
+109 meta 2.330535650253296
+110 meta 2.3127479553222656
+111 meta 2.21610426902771
+112 meta 2.4104416370391846
+113 meta 2.1751182079315186
+114 meta 2.2463138103485107
+115 meta 2.245901107788086
+116 meta 2.4106359481811523
+117 meta 2.303882122039795
+118 meta 2.446589469909668
+119 meta 2.582864761352539
+120 meta 2.143496513366699
+121 meta 2.2893614768981934
+122 meta 2.3536252975463867
+123 meta 2.049989700317383
+124 meta 2.2605957984924316
+125 meta 2.1625781059265137
+126 meta 2.1058359146118164
+127 meta 2.3807599544525146
+128 meta 2.3775973320007324
+129 meta 2.146603584289551
+130 meta 2.2086923122406006
+131 meta 2.213871479034424
+132 meta 2.20959734916687
+133 meta 2.0717978477478027
+134 meta 2.149050235748291
+135 meta 2.1171562671661377
+136 meta 2.154834747314453
+137 meta 2.0872769355773926
+138 meta 1.938307762145996
+139 meta 2.341219663619995
+140 meta 2.1030030250549316
+141 meta 2.3359298706054688
+142 meta 2.033026695251465
+143 meta 2.1805949211120605
+144 meta 2.196180582046509
+145 meta 1.9918038845062256
+146 meta 2.0345494747161865
+147 meta 1.911967158317566
+148 meta 2.0064613819122314
+149 meta 2.194283962249756
+150 meta 1.9407870769500732
+151 meta 2.4042253494262695
+152 meta 1.9513310194015503
+153 meta 2.0073397159576416
+154 meta 2.087310314178467
+155 meta 2.1462512016296387
+156 meta 2.0444440841674805
+157 meta 2.143639087677002
+158 meta 2.229421377182007
+159 meta 2.0659432411193848
+160 meta 1.9240117073059082
+161 meta 1.9848865270614624
+162 meta 2.249967098236084
+163 meta 1.9606761932373047
+164 meta 1.9604753255844116
+165 meta 1.9548916816711426
+166 meta 1.7998557090759277
+167 meta 2.115344524383545
+168 meta 2.086310386657715
+169 meta 2.2105345726013184
+170 meta 2.1358890533447266
+171 meta 2.063577651977539
+172 meta 2.1992506980895996
+173 meta 2.060734272003174
+174 meta 1.7953577041625977
+175 meta 1.910995364189148
+176 meta 1.9320505857467651
+177 meta 1.8941974639892578
+178 meta 2.029716968536377
+179 meta 1.9591678380966187
+180 meta 1.8311965465545654
+181 meta 2.0097978115081787
+182 meta 2.0683753490448
+183 meta 1.8730043172836304
+184 meta 1.8931182622909546
+185 meta 1.9637784957885742
+186 meta 1.9395630359649658
+187 meta 1.9251807928085327
+188 meta 1.8329538106918335
+189 meta 1.9071319103240967
+190 meta 1.9937465190887451
+191 meta 1.8647369146347046
+192 meta 1.8728744983673096
+193 meta 2.0621862411499023
+194 meta 1.9234540462493896
+195 meta 1.6742613315582275
+196 meta 1.713651418685913
+197 meta 1.9577200412750244
+198 meta 1.9895663261413574
+199 meta 1.9855364561080933
+200 meta 1.88981294631958
+201 meta 1.7817935943603516
+202 meta 1.793901801109314
+203 meta 1.9920344352722168
+204 meta 1.9437507390975952
+205 meta 2.0894131660461426
+206 meta 2.0235280990600586
+207 meta 2.0768260955810547
+208 meta 2.1429474353790283
+209 meta 2.0541696548461914
+210 meta 1.954436182975769
+211 meta 1.9041578769683838
+212 meta 2.126732349395752
+213 meta 2.0134429931640625
+214 meta 2.0115349292755127
+215 meta 1.876490592956543
+216 meta 1.9704761505126953
+217 meta 1.8204846382141113
+218 meta 2.046081304550171
+219 meta 1.8642133474349976
+220 meta 1.8952913284301758
+221 meta 2.035060167312622
+222 meta 1.9963927268981934
+223 meta 2.151874542236328
+224 meta 1.9377813339233398
+225 meta 1.8386644124984741
+226 meta 1.7855920791625977
+227 meta 1.8674781322479248
+228 meta 1.7939857244491577
+229 meta 1.9211610555648804
+230 meta 1.8281495571136475
+231 meta 1.8005075454711914
+232 meta 2.012328624725342
+233 meta 1.9965121746063232
+234 meta 1.9342527389526367
+235 meta 1.8492002487182617
+236 meta 1.857299566268921
+237 meta 1.67503023147583
+238 meta 1.7956856489181519
+239 meta 2.137397289276123
+240 meta 1.9596927165985107
+241 meta 1.8997015953063965
+242 meta 1.7491858005523682
+243 meta 1.9210388660430908
+244 meta 2.222512722015381
+245 meta 2.0080604553222656
+246 meta 1.9045418500900269
+247 meta 2.003403663635254
+248 meta 1.8809632062911987
+249 meta 1.7940034866333008
+250 meta 1.6909549236297607
+251 meta 1.8020164966583252
+252 meta 1.9207093715667725
+253 meta 1.8473801612854004
+254 meta 1.971297025680542
+255 meta 2.284505605697632
+256 meta 1.9443734884262085
+257 meta 1.8875812292099
+258 meta 1.850182056427002
+259 meta 1.860630989074707
+260 meta 2.013522148132324
+261 meta 1.8844432830810547
+262 meta 2.034684658050537
+263 meta 1.922289252281189
+264 meta 2.094778060913086
+265 meta 1.991708755493164
+266 meta 2.114353656768799
+267 meta 2.0569052696228027
+268 meta 2.201181411743164
+269 meta 2.056163787841797
+270 meta 2.2539114952087402
+271 meta 1.8516874313354492
+272 meta 2.175138235092163
+273 meta 1.8864383697509766
+274 meta 1.7996430397033691
+275 meta 1.8934673070907593
+276 meta 2.0123095512390137
+277 meta 2.303166389465332
+278 meta 2.1033828258514404
+279 meta 1.7478976249694824
+280 meta 1.7678011655807495
+281 meta 1.664679765701294
+282 meta 2.03605318069458
+283 meta 1.979539394378662
+284 meta 2.004134178161621
+285 meta 2.6430912017822266
+286 meta 1.4563579559326172
+287 meta 1.6732070446014404
+288 meta 2.01190185546875
+289 meta 1.9887484312057495
+290 meta 2.097372055053711
+291 meta 2.0652825832366943
+292 meta 2.0729024410247803
+293 meta 1.8655551671981812
+294 meta 1.8456872701644897
+295 meta 2.0327141284942627
+296 meta 1.925642967224121
+297 meta 1.8814396858215332
+298 meta 2.062406301498413
+299 meta 1.839526653289795
+300 meta 1.753554105758667
+301 meta 1.909667730331421
+302 meta 1.7979741096496582
+303 meta 1.924482822418213
+304 meta 1.7993028163909912
+305 meta 2.0518674850463867
+306 meta 1.780898928642273
+307 meta 1.7884531021118164
+308 meta 1.923420786857605
+309 meta 2.04457950592041
+310 meta 2.09182071685791
+311 meta 1.7729578018188477
+312 meta 2.077307939529419
+313 meta 2.1153430938720703
+314 meta 2.278526782989502
+315 meta 1.9019726514816284
+316 meta 2.098724365234375
+557
+317 meta 2.198030710220337
+Exception raised -   in query_set
+318 meta 1.5247915983200073
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+319 meta 1.5397075414657593
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+320 meta 1.5274665355682373
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+321 meta 1.6167380809783936
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+322 meta 1.5371406078338623
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+323 meta 1.5368999242782593
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+324 meta 1.6235122680664062
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+325 meta 1.6290963888168335
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+326 meta 1.4928534030914307
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+327 meta 1.3582547903060913
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+328 meta 1.8079497814178467
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+329 meta 1.5523087978363037
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+330 meta 1.653348445892334
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+331 meta 1.4080984592437744
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+332 meta 1.879215955734253
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+333 meta 1.6059465408325195
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+334 meta 1.6299283504486084
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+335 meta 1.452288031578064
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+336 meta 1.5688159465789795
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+337 meta 1.5353124141693115
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+338 meta 1.5492801666259766
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+339 meta 1.5437805652618408
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+340 meta 1.452284574508667
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+341 meta 1.5529963970184326
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+342 meta 1.2961530685424805
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+343 meta 1.531302809715271
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+344 meta 1.5179023742675781
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+345 meta 1.5046491622924805
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+346 meta 1.5181243419647217
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+347 meta 1.3771913051605225
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+348 meta 1.560623049736023
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+349 meta 1.6585156917572021
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+350 meta 1.3702764511108398
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+351 meta 1.5398377180099487
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+352 meta 1.5577714443206787
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+353 meta 1.5638446807861328
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+354 meta 1.66927170753479
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+355 meta 1.5174853801727295
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+356 meta 1.5403064489364624
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+357 meta 1.4672117233276367
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+358 meta 1.7583386898040771
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+359 meta 1.7080763578414917
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+360 meta 1.5956610441207886
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+361 meta 1.5096588134765625
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+362 meta 1.5549612045288086
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+363 meta 1.9149999618530273
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+364 meta 1.4840091466903687
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+365 meta 1.5948259830474854
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+366 meta 1.440902590751648
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+367 meta 1.6516330242156982
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+368 meta 1.678457498550415
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+369 meta 1.715519905090332
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+370 meta 1.5133330821990967
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+371 meta 1.3848848342895508
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+372 meta 1.6009109020233154
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+373 meta 1.6328673362731934
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+374 meta 1.4532701969146729
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+375 meta 1.1688432693481445
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+376 meta 1.501218318939209
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+377 meta 1.383087396621704
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+378 meta 1.5643949508666992
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+379 meta 1.210402011871338
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+380 meta 1.2988135814666748
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+381 meta 1.774521827697754
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+382 meta 1.4305003881454468
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+383 meta 1.131594181060791
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+384 meta 1.5995547771453857
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+385 meta 1.7123162746429443
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+386 meta 1.2448525428771973
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+387 meta 1.5760729312896729
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+388 meta 1.6236399412155151
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+389 meta 1.5319938659667969
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+390 meta 1.7245903015136719
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+391 meta 1.4027400016784668
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+392 meta 1.1565630435943604
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+393 meta 1.575103759765625
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+394 meta 1.4328527450561523
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+395 meta 1.5140125751495361
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+396 meta 1.3842239379882812
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+397 meta 1.5481102466583252
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+398 meta 1.3707072734832764
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+399 meta 1.3417729139328003
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+400 meta 1.3417668342590332
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+401 meta 1.3380944728851318
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+402 meta 1.7269115447998047
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+403 meta 1.8497213125228882
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+404 meta 1.583246111869812
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+405 meta 1.2683281898498535
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+406 meta 1.2907533645629883
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+407 meta 1.4251950979232788
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+408 meta 1.589510202407837
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+409 meta 1.4178125858306885
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+410 meta 1.3306841850280762
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+411 meta 1.5485429763793945
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+412 meta 1.6003988981246948
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+413 meta 1.7120494842529297
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+414 meta 1.4618396759033203
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+415 meta 1.6368989944458008
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+416 meta 1.2985188961029053
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+417 meta 1.3783843517303467
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+418 meta 1.8104898929595947
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+419 meta 1.6908254623413086
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+420 meta 1.3874175548553467
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+421 meta 1.576984167098999
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+422 meta 1.613037347793579
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+423 meta 1.5389155149459839
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+424 meta 1.315749168395996
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+425 meta 1.6598169803619385
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+426 meta 1.6931957006454468
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+427 meta 1.3717678785324097
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+428 meta 1.7949209213256836
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+429 meta 1.364811897277832
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+430 meta 1.483851671218872
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+431 meta 1.9105199575424194
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+432 meta 1.4175934791564941
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+433 meta 1.3325375318527222
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+434 meta 1.3973478078842163
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+435 meta 1.4661935567855835
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+436 meta 1.7897324562072754
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+437 meta 1.6292507648468018
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+438 meta 1.4408830404281616
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+439 meta 1.4354575872421265
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+440 meta 1.4638843536376953
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+441 meta 1.4985120296478271
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+442 meta 1.5336731672286987
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+443 meta 1.9116971492767334
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+444 meta 1.2897100448608398
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+445 meta 1.717926263809204
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+446 meta 1.6540489196777344
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+447 meta 1.5088624954223633
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+448 meta 1.3181692361831665
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+449 meta 1.2585543394088745
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+450 meta 1.1379598379135132
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+451 meta 1.221327543258667
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+452 meta 1.5275719165802002
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+453 meta 1.4860312938690186
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+454 meta 1.6348670721054077
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+455 meta 1.2871307134628296
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+456 meta 1.2799692153930664
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+457 meta 1.2780215740203857
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+458 meta 1.4074134826660156
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+459 meta 1.8729054927825928
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+460 meta 1.597975730895996
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+461 meta 1.3862683773040771
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+462 meta 1.1856389045715332
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+463 meta 1.4942888021469116
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+464 meta 1.562678575515747
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+465 meta 1.7345306873321533
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+466 meta 1.4519952535629272
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+467 meta 1.2082383632659912
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+468 meta 1.2665188312530518
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+469 meta 1.4977316856384277
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+470 meta 1.3121566772460938
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+471 meta 1.4073126316070557
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+472 meta 1.3741261959075928
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+473 meta 1.4471391439437866
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+474 meta 1.5603845119476318
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+475 meta 1.4490407705307007
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+476 meta 1.4641878604888916
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+477 meta 1.5902951955795288
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+478 meta 1.595149040222168
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+479 meta 1.4405851364135742
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+480 meta 1.2561384439468384
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+481 meta 1.3641371726989746
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+482 meta 1.483472228050232
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+483 meta 1.5751886367797852
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+484 meta 1.3890093564987183
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+485 meta 1.8492202758789062
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+486 meta 1.8243818283081055
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+487 meta 1.7716357707977295
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+488 meta 1.5234696865081787
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+489 meta 1.577678918838501
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+490 meta 1.6715844869613647
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+491 meta 1.3954079151153564
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+492 meta 1.4096581935882568
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+493 meta 1.5513207912445068
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+494 meta 1.4459447860717773
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+495 meta 1.4113672971725464
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+496 meta 1.5843857526779175
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+497 meta 1.4034221172332764
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+498 meta 1.4253573417663574
+Exception raised -  in support set. Task generator is empty
+Exception raised -   in query_set
+499 meta 1.6158535480499268
+Done training ... archiving three models!

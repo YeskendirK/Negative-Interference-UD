@@ -1,0 +1,224 @@
+config.json
+weights.th
+vocabulary/
+vocabulary/feats.txt
+vocabulary/head_tags.txt
+vocabulary/lemmas.txt
+vocabulary/non_padded_namespaces.txt
+vocabulary/token_characters.txt
+vocabulary/tokens.txt
+vocabulary/upos.txt
+vocabulary/xpos.txt
+Your label namespace was 'upos'. We recommend you use a namespace ending with 'labels' or 'tags', so we don't add UNK and PAD tokens by default to your vocabulary.  See documentation for `non_padded_namespaces` parameter in Vocabulary.
+Your label namespace was 'xpos'. We recommend you use a namespace ending with 'labels' or 'tags', so we don't add UNK and PAD tokens by default to your vocabulary.  See documentation for `non_padded_namespaces` parameter in Vocabulary.
+Your label namespace was 'feats'. We recommend you use a namespace ending with 'labels' or 'tags', so we don't add UNK and PAD tokens by default to your vocabulary.  See documentation for `non_padded_namespaces` parameter in Vocabulary.
+Your label namespace was 'lemmas'. We recommend you use a namespace ending with 'labels' or 'tags', so we don't add UNK and PAD tokens by default to your vocabulary.  See documentation for `non_padded_namespaces` parameter in Vocabulary.
+0it [00:00, ?it/s]1it [00:00,  8.83it/s]118it [00:00, 656.19it/s]190it [00:00, 674.57it/s]266it [00:00, 703.68it/s]348it [00:00, 743.87it/s]424it [00:00, 745.41it/s]500it [00:00, 727.43it/s]576it [00:00, 735.27it/s]650it [00:00, 727.98it/s]728it [00:01, 743.21it/s]803it [00:01, 443.84it/s]862it [00:01, 462.91it/s]936it [00:01, 524.27it/s]1006it [00:01, 566.08it/s]1073it [00:01, 591.68it/s]1115it [00:01, 602.31it/s]
+Encountered the logits key in the model's return dictionary which couldn't be split by the batch size. Key will be ignored.
+Encountered the class_probabilities key in the model's return dictionary which couldn't be split by the batch size. Key will be ignored.
+Encountered the arc_loss key in the model's return dictionary which couldn't be split by the batch size. Key will be ignored.
+Encountered the tag_loss key in the model's return dictionary which couldn't be split by the batch size. Key will be ignored.
+Encountered the loss key in the model's return dictionary which couldn't be split by the batch size. Key will be ignored.
+0it [00:00, ?it/s]109it [00:00, 1085.01it/s]218it [00:00, 913.32it/s] 312it [00:00, 788.33it/s]395it [00:00, 799.20it/s]477it [00:00, 779.12it/s]556it [00:00, 770.60it/s]634it [00:00, 745.33it/s]709it [00:00, 740.07it/s]784it [00:01, 713.30it/s]856it [00:01, 662.53it/s]932it [00:01, 687.51it/s]1002it [00:01, 683.54it/s]1071it [00:01, 678.21it/s]1115it [00:01, 725.36it/s]
+0it [00:00, ?it/s]113it [00:00, 1124.80it/s]226it [00:00, 912.73it/s] 320it [00:00, 796.64it/s]402it [00:00, 800.55it/s]484it [00:00, 769.74it/s]562it [00:00, 764.43it/s]639it [00:01, 444.30it/s]717it [00:01, 511.00it/s]783it [00:01, 541.02it/s]848it [00:01, 546.87it/s]924it [00:01, 597.98it/s]991it [00:01, 609.88it/s]1061it [00:01, 633.35it/s]1115it [00:01, 631.89it/s]
+0it [00:00, ?it/s]111it [00:00, 1108.33it/s]222it [00:00, 918.28it/s] 316it [00:00, 798.66it/s]398it [00:00, 804.17it/s]480it [00:00, 778.62it/s]559it [00:00, 769.21it/s]637it [00:00, 749.54it/s]716it [00:00, 761.07it/s]793it [00:01, 725.53it/s]866it [00:01, 663.14it/s]945it [00:01, 694.34it/s]1016it [00:01, 692.37it/s]1086it [00:01, 492.11it/s]1115it [00:01, 670.82it/s]
+0it [00:00, ?it/s]108it [00:00, 1073.95it/s]216it [00:00, 911.75it/s] 309it [00:00, 787.83it/s]391it [00:00, 798.25it/s]473it [00:00, 385.00it/s]549it [00:01, 453.07it/s]619it [00:01, 503.61it/s]696it [00:01, 563.56it/s]766it [00:01, 589.52it/s]835it [00:01, 585.03it/s]906it [00:01, 617.32it/s]982it [00:01, 652.81it/s]1052it [00:01, 655.98it/s]1115it [00:01, 602.67it/s]
+0it [00:00, ?it/s]114it [00:00, 1138.04it/s]228it [00:00, 916.16it/s] 323it [00:00, 802.93it/s]406it [00:00, 806.99it/s]489it [00:00, 759.44it/s]568it [00:00, 766.59it/s]646it [00:00, 748.03it/s]724it [00:00, 753.82it/s]800it [00:01, 723.88it/s]873it [00:01, 664.31it/s]949it [00:01, 689.08it/s]1019it [00:01, 691.42it/s]1089it [00:01, 680.49it/s]1115it [00:01, 729.92it/s]
+0it [00:00, ?it/s]111it [00:00, 1108.59it/s]222it [00:00, 914.23it/s] 316it [00:00, 791.99it/s]399it [00:00, 804.64it/s]481it [00:00, 773.92it/s]560it [00:00, 765.07it/s]638it [00:00, 745.18it/s]717it [00:00, 754.86it/s]793it [00:01, 722.52it/s]866it [00:01, 660.30it/s]944it [00:01, 691.85it/s]1015it [00:01, 685.55it/s]1085it [00:01, 682.40it/s]1115it [00:01, 728.59it/s]
+0it [00:00, ?it/s]112it [00:00, 1117.01it/s]224it [00:00, 917.57it/s] 318it [00:00, 792.26it/s]402it [00:00, 806.43it/s]485it [00:00, 767.31it/s]563it [00:00, 767.58it/s]641it [00:00, 743.50it/s]720it [00:00, 754.86it/s]796it [00:01, 720.80it/s]869it [00:01, 659.12it/s]945it [00:01, 683.88it/s]1015it [00:01, 683.08it/s]1084it [00:01, 683.24it/s]1115it [00:01, 726.27it/s]
+0it [00:00, ?it/s]113it [00:00, 1125.13it/s]226it [00:00, 912.00it/s] 320it [00:00, 796.49it/s]402it [00:00, 803.79it/s]484it [00:00, 770.95it/s]562it [00:00, 764.05it/s]639it [00:00, 743.83it/s]717it [00:00, 754.24it/s]793it [00:01, 721.53it/s]866it [00:01, 659.29it/s]944it [00:01, 690.93it/s]1015it [00:01, 687.18it/s]1085it [00:01, 680.25it/s]1115it [00:01, 728.30it/s]
+0it [00:00, ?it/s]111it [00:00, 1108.49it/s]222it [00:00, 924.54it/s] 317it [00:00, 800.50it/s]401it [00:00, 813.05it/s]484it [00:00, 774.34it/s]563it [00:00, 773.58it/s]641it [00:00, 748.86it/s]720it [00:00, 758.24it/s]797it [00:01, 730.14it/s]871it [00:01, 351.78it/s]949it [00:01, 421.84it/s]1015it [00:01, 465.46it/s]1081it [00:01, 505.10it/s]1115it [00:01, 596.45it/s]
+0it [00:00, ?it/s]114it [00:00, 1130.26it/s]228it [00:00, 426.77it/s] 295it [00:00, 484.86it/s]371it [00:00, 554.15it/s]446it [00:00, 605.78it/s]518it [00:00, 631.55it/s]592it [00:00, 661.10it/s]664it [00:01, 674.44it/s]738it [00:01, 692.93it/s]811it [00:01, 671.14it/s]881it [00:01, 639.60it/s]955it [00:01, 666.61it/s]1026it [00:01, 678.00it/s]1095it [00:01, 664.94it/s]1115it [00:01, 625.96it/s]
+0it [00:00, ?it/s]114it [00:00, 1130.18it/s]228it [00:00, 923.25it/s] 323it [00:00, 805.46it/s]407it [00:00, 815.37it/s]490it [00:00, 765.81it/s]572it [00:00, 775.52it/s]651it [00:00, 756.06it/s]729it [00:00, 763.03it/s]806it [00:01, 724.55it/s]879it [00:01, 664.40it/s]956it [00:01, 693.01it/s]1027it [00:01, 694.62it/s]1098it [00:01, 677.89it/s]1115it [00:01, 734.98it/s]
+0it [00:00, ?it/s]111it [00:00, 1104.62it/s]222it [00:00, 921.35it/s] 317it [00:00, 795.39it/s]400it [00:00, 805.84it/s]483it [00:00, 771.47it/s]562it [00:00, 768.52it/s]640it [00:00, 747.64it/s]720it [00:00, 760.55it/s]797it [00:01, 730.25it/s]871it [00:01, 666.62it/s]948it [00:01, 693.68it/s]1019it [00:01, 694.84it/s]1090it [00:01, 684.62it/s]1115it [00:01, 731.89it/s]
+0it [00:00, ?it/s]114it [00:00, 1137.58it/s]228it [00:00, 921.35it/s] 323it [00:00, 807.25it/s]406it [00:00, 811.59it/s]489it [00:00, 763.43it/s]568it [00:00, 769.70it/s]646it [00:00, 752.02it/s]724it [00:00, 753.23it/s]800it [00:01, 728.20it/s]874it [00:01, 664.93it/s]942it [00:01, 398.40it/s]1007it [00:01, 444.63it/s]1069it [00:01, 480.41it/s]1115it [00:01, 620.04it/s]
+0it [00:00, ?it/s]111it [00:00, 1102.63it/s]222it [00:00, 923.20it/s] 317it [00:00, 428.10it/s]396it [00:00, 504.39it/s]471it [00:00, 559.59it/s]546it [00:00, 606.66it/s]619it [00:01, 627.70it/s]694it [00:01, 659.78it/s]767it [00:01, 656.77it/s]837it [00:01, 630.40it/s]906it [00:01, 646.00it/s]981it [00:01, 674.33it/s]1051it [00:01, 664.82it/s]1115it [00:01, 624.14it/s]
+0it [00:00, ?it/s]114it [00:00, 1129.82it/s]227it [00:00, 918.31it/s] 322it [00:00, 808.42it/s]406it [00:00, 815.56it/s]489it [00:00, 768.31it/s]568it [00:00, 774.41it/s]647it [00:00, 755.57it/s]726it [00:00, 762.74it/s]803it [00:01, 729.84it/s]877it [00:01, 667.18it/s]954it [00:01, 693.69it/s]1025it [00:01, 697.87it/s]1096it [00:01, 680.12it/s]1115it [00:01, 735.66it/s]
+0it [00:00, ?it/s]111it [00:00, 1107.66it/s]222it [00:00, 912.81it/s] 316it [00:00, 788.93it/s]399it [00:00, 802.52it/s]481it [00:00, 774.22it/s]560it [00:00, 766.42it/s]638it [00:00, 747.61it/s]717it [00:00, 758.40it/s]794it [00:01, 727.86it/s]868it [00:01, 666.38it/s]946it [00:01, 695.84it/s]1017it [00:01, 691.28it/s]1087it [00:01, 681.91it/s]1115it [00:01, 730.86it/s]
+0it [00:00, ?it/s]114it [00:00, 1131.21it/s]228it [00:00, 928.35it/s] 324it [00:00, 807.58it/s]407it [00:00, 814.22it/s]490it [00:00, 763.56it/s]572it [00:00, 773.12it/s]651it [00:00, 748.86it/s]731it [00:00, 762.26it/s]808it [00:01, 724.66it/s]881it [00:01, 670.15it/s]955it [00:01, 405.90it/s]1024it [00:01, 458.02it/s]1091it [00:01, 501.60it/s]1115it [00:01, 627.78it/s]
+0it [00:00, ?it/s]113it [00:00, 1126.92it/s]226it [00:00, 918.50it/s] 321it [00:00, 801.78it/s]404it [00:00, 410.74it/s]476it [00:00, 470.63it/s]549it [00:00, 526.55it/s]616it [00:01, 556.40it/s]693it [00:01, 609.42it/s]763it [00:01, 619.51it/s]831it [00:01, 602.48it/s]901it [00:01, 625.29it/s]979it [00:01, 665.20it/s]1049it [00:01, 651.22it/s]1115it [00:01, 607.93it/s]
+0it [00:00, ?it/s]112it [00:00, 1114.77it/s]224it [00:00, 920.06it/s] 319it [00:00, 798.55it/s]403it [00:00, 812.34it/s]486it [00:00, 772.71it/s]565it [00:00, 776.58it/s]644it [00:00, 747.99it/s]724it [00:00, 757.66it/s]801it [00:01, 731.84it/s]875it [00:01, 662.87it/s]954it [00:01, 694.35it/s]1025it [00:01, 694.39it/s]1096it [00:01, 679.66it/s]1115it [00:01, 733.39it/s]
+0it [00:00, ?it/s]131it [00:00, 1928.82it/s]
+0it [00:00, ?it/s]131it [00:00, 3840.35it/s]
+0it [00:00, ?it/s]131it [00:00, 3678.15it/s]
+0it [00:00, ?it/s]131it [00:00, 3660.98it/s]
+0it [00:00, ?it/s]131it [00:00, 3832.95it/s]
+0it [00:00, ?it/s]58it [00:00, 170.15it/s]131it [00:00, 364.47it/s]
+0it [00:00, ?it/s]131it [00:00, 3722.41it/s]
+0it [00:00, ?it/s]131it [00:00, 3795.28it/s]
+0it [00:00, ?it/s]131it [00:00, 3861.62it/s]
+0it [00:00, ?it/s]131it [00:00, 3674.59it/s]
+0it [00:00, ?it/s]131it [00:00, 3825.77it/s]
+0it [00:00, ?it/s]131it [00:00, 3838.90it/s]
+0it [00:00, ?it/s]131it [00:00, 3724.30it/s]
+0it [00:00, ?it/s]131it [00:00, 3821.97it/s]
+0it [00:00, ?it/s]131it [00:00, 3842.33it/s]
+0it [00:00, ?it/s]131it [00:00, 3730.62it/s]
+0it [00:00, ?it/s]131it [00:00, 3809.41it/s]
+0it [00:00, ?it/s]131it [00:00, 3862.73it/s]
+0it [00:00, ?it/s]131it [00:00, 3723.44it/s]
+0it [00:00, ?it/s]131it [00:00, 3808.48it/s]
+Saving all to directory metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500
+Running from saved_models/XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi/500 with learning rates 0.0001 1e-05
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-train.conllu
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance0.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance0.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance1.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance1.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance2.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance2.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance3.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance3.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance4.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance4.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance5.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance5.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance6.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance6.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance7.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance7.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance8.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance8.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance9.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance9.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance10.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance10.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance11.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance11.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance12.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance12.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance13.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance13.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance14.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance14.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance15.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance15.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance16.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance16.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance17.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance17.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance18.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance18.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Bulgarian-BTB/bg_btb-ud-dev.conllu
+28
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance19.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Bulgarian-BTB_performance19.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Bulgarian-BTB
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-train.conllu
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance0.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance0.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance1.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance1.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance2.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance2.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance3.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance3.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance4.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance4.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance5.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance5.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance6.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance6.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance7.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance7.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance8.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance8.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance9.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance9.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance10.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance10.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance11.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance11.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance12.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance12.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance13.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance13.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance14.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance14.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance15.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance15.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance16.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance16.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance17.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance17.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance18.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance18.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG
+data/ud-treebanks-v2.3/UD_Telugu-MTG/te_mtg-ud-dev.conllu
+0
+IM GOING TO SAVE METRICS TO metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance19.json
+Wrote metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/UD_Telugu-MTG_performance19.json removing metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi_500/resultsvalidationUD_Telugu-MTG

@@ -58,6 +58,7 @@ def maml_update(model, lr, lr_small, grads=None, in_recursion=False, doing_BERT=
 
             if p is not None and p.grad is not None:
                 model.text_field_embedder._parameters[param_key] = p - lr_small * p.grad
+                p.grad = None
 
         # Second, handle the buffers if necessary
         for buffer_key in model.text_field_embedder._buffers:
@@ -67,7 +68,7 @@ def maml_update(model, lr, lr_small, grads=None, in_recursion=False, doing_BERT=
                 model.text_field_embedder._buffers[buffer_key] = (
                     buff - lr_small * buff.grad
                 )
-
+                buff.grad = None
         # Then, recurse for each submodule
         for module_key in model.text_field_embedder._modules:
             model.text_field_embedder._modules[module_key] = maml_update(
@@ -86,13 +87,14 @@ def maml_update(model, lr, lr_small, grads=None, in_recursion=False, doing_BERT=
 
             if p is not None and p.grad is not None:
                 model.decoders._parameters[param_key] = p - lr * p.grad
+                p.grad = None
         # Second, handle the buffers if necessary
         for buffer_key in model.decoders._buffers:
             print("There are buffers")
             buff = model.decoders._buffers[buffer_key]
             if buff is not None and buff.grad is not None:
                 model.decoders._buffers[buffer_key] = buff - lr * buff.grad
-
+                buff.grad = None
         # Then, recurse for each submodule
         for module_key in model.decoders._modules:
             model.decoders._modules[module_key] = maml_update(
@@ -109,12 +111,14 @@ def maml_update(model, lr, lr_small, grads=None, in_recursion=False, doing_BERT=
 
             if p is not None and p.grad is not None:
                 model.scalar_mix._parameters[param_key] = p - lr * p.grad
+                p.grad = None
         # Second, handle the buffers if necessary
         for buffer_key in model.scalar_mix._buffers:
             print("There are buffers")
             buff = model.scalar_mix._buffers[buffer_key]
             if buff is not None and buff.grad is not None:
                 model.scalar_mix._buffers[buffer_key] = buff - lr * buff.grad
+                buff.grad = None
 
         # Then, recurse for each submodule
         for module_key in model.scalar_mix._modules:
@@ -131,9 +135,10 @@ def maml_update(model, lr, lr_small, grads=None, in_recursion=False, doing_BERT=
         real_lr = lr if not doing_BERT else lr_small
         for param_key in model._parameters:
             p = model._parameters[param_key]
-
+            
             if p is not None and p.grad is not None:
                 model._parameters[param_key] = p - real_lr * p.grad
+                p.grad = None
 
         # Second, handle the buffers if necessary
         for buffer_key in model._buffers:
@@ -141,6 +146,7 @@ def maml_update(model, lr, lr_small, grads=None, in_recursion=False, doing_BERT=
             buff = model._buffers[buffer_key]
             if buff is not None and buff.grad is not None:
                 model._buffers[buffer_key] = buff - real_lr * buff.grad
+                buff.grad = None
 
         # Then, recurse for each submodule
         for module_key in model._modules:

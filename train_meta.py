@@ -3,7 +3,6 @@
 This file Meta-Trains on 7 languages
 And validates on Bulgarian
 """
-from naming_conventions import train_languages, train_languages_lowercase
 from get_language_dataset import get_language_dataset
 from get_default_params import get_params
 from udify import util
@@ -24,6 +23,8 @@ import subprocess
 import json
 import sys
 import os
+import naming_conventions
+#Some commennt
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -35,9 +36,10 @@ def main():
         "--skip_update", default=0, type=float, help="Skip update on the support set"
     )
     parser.add_argument("--seed", default=9999, type=int, help="Set seed")
-    parser.add_argument(
-        "--skip_update", default=0, type=float, help="Skip update on the support set"
-    )
+    # Throwing an argparse error
+    # parser.add_argument(
+    #     "--skip_update", default=0, type=float, help="Skip update on the support set"
+    # )
 
     parser.add_argument(
         "--support_set_size", default=32, type=int, help="Support set size"
@@ -93,9 +95,10 @@ def main():
 
     # Yes, i know.
     training_tasks = []
-    train_languages = np.array(train_languages)
-    train_languages_lowercase = np.array(train_languages_lowercase)
-    hindi_indices = [0, 1, 2, 3, 4, 6]
+    train_languages = np.array(naming_conventions.train_languages)
+    train_languages_lowercase = np.array(naming_conventions.train_languages_lowercase)
+    # The 6th indice seems to be causing a problem, removing it for now
+    hindi_indices = [0, 1, 2, 3, 4]
     italian_indices = [0, 1, 3, 4, 5, 6]
     czech_indices = [0, 2, 3, 4, 5, 6]
     if args.notaddhindi:
@@ -167,7 +170,7 @@ def main():
     META_WRITER = MODEL_VAL_DIR + "/meta_results.txt"
 
     if not os.path.exists(MODEL_VAL_DIR):
-        subprocess.run(["mkdir", MODEL_VAL_DIR])
+        subprocess.run(["mkdir", "-p", MODEL_VAL_DIR]) # Missing the parent tag, saved_models folder doesn't exist by itself
         subprocess.run(["mkdir", MODEL_VAL_DIR + "/performance"])
         subprocess.run(["mkdir", MODEL_VAL_DIR + "/predictions"])
         subprocess.run(["cp", "-r", MODEL_FILE + "/vocabulary", MODEL_VAL_DIR])
@@ -205,28 +208,32 @@ def main():
 
         """Inner adaptation loop"""
         for j, task_generator in enumerate(training_tasks):
-            learner = meta_m.clone()
+            learner = meta_m.clone(first_order=True)
 
             # Sample two batches
-            support_set = next(task_generator)[0]
-            if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
-                for mini_epoch in range(UPDATES):
-                    inner_loss = learner.forward(**support_set)["loss"]
-                    learner.adapt(inner_loss, first_order=True)
-                    del inner_loss
-                    torch.cuda.empty_cache()
-            del support_set
+            try:
+                support_set = next(task_generator)[0]
+                if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
+                    for mini_epoch in range(UPDATES):
+                        inner_loss = learner.forward(**support_set)["loss"]
+                        learner.adapt(inner_loss, first_order=True)
+                        del inner_loss
+                        torch.cuda.empty_cache()
+                del support_set
+            except StopIteration as e:
+                print(f"Exception raised - {e} in support set. Task generator is empty")
 
-            query_set = next(task_generator)[0]
+            try:
+                query_set = next(task_generator)[0]
 
-            eval_loss = learner.forward(**query_set)["loss"]
-            iteration_loss += eval_loss
-
-            del eval_loss
-            del learner
-            del query_set
-            torch.cuda.empty_cache()
-
+                eval_loss = learner.forward(**query_set)["loss"]
+                iteration_loss += eval_loss
+                del eval_loss
+                del learner
+                del query_set
+                torch.cuda.empty_cache()
+            except StopIteration as e:
+                print(f"Exception raised -  {e} in query_set")
         # Sum up and normalize over all 7 losses
         iteration_loss /= len(training_tasks)
         optimizer.zero_grad()
@@ -243,7 +250,8 @@ def main():
         del iteration_loss
         torch.cuda.empty_cache()
 
-        if iteration + 1 in [500, 1500, 2000] and not (
+        # Saving the 250th episode as oom errors are appearing in lisa
+        if iteration + 1 in [250, 500, 1500, 2000] and not (
             iteration + 1 == 500 and DOING_MAML
         ):
             backup_path = os.path.join(

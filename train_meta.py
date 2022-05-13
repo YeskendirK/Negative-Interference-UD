@@ -24,6 +24,8 @@ import json
 import sys
 import os
 import naming_conventions
+from allennlp.nn import util
+
 #Some commennt
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -40,7 +42,11 @@ def main():
     # parser.add_argument(
     #     "--skip_update", default=0, type=float, help="Skip update on the support set"
     # )
-
+    parser.add_argument("--resume", default=None, type=str, help="If you want to resume train_meta from a previous "
+                                                                 "checkpoint. A weights file eg "
+                                                                 "saved_models/model250.th should be loaded")
+    parser.add_argument("--checkpointep", default=0, type=int, help="By default the iteration starts from 0, "
+                                                                    "if specified(Usually when --resume is used), iteration count begins from this number")
     parser.add_argument(
         "--support_set_size", default=32, type=int, help="Support set size"
     )
@@ -98,7 +104,7 @@ def main():
     train_languages = np.array(naming_conventions.train_languages)
     train_languages_lowercase = np.array(naming_conventions.train_languages_lowercase)
     # The 6th indice seems to be causing a problem, removing it for now
-    hindi_indices = [0, 1, 2, 3, 4]
+    hindi_indices = [0, 1, 2, 3, 4, 6]
     italian_indices = [0, 1, 3, 4, 5, 6]
     czech_indices = [0, 2, 3, 4, 5, 6]
     if args.notaddhindi:
@@ -188,7 +194,11 @@ def main():
     )
     meta_m = MAML(
         m, INNER_LR_DECODER, INNER_LR_BERT, first_order=True, allow_unused=True
-    ).cuda()
+    )
+    if args.resume:
+        model_state = torch.load(args.resume)
+        meta_m.module.load_state_dict(model_state)
+    meta_m.cuda()
     optimizer = Adam(
         [
             {
@@ -203,37 +213,51 @@ def main():
 
     scheduler = get_cosine_schedule_with_warmup(optimizer, 50, 500)
 
-    for iteration in range(EPISODES):
+    def restart_iter(language, language_lowercase_, args_):
+        return get_language_dataset(language, language_lowercase_,
+                                    seed=args_.seed, support_set_size=args_.support_set_size)
+
+    print(f"BEGINNING THE META TRAIN FROM EPISODE = {args.checkpointep}")
+    for iteration in range(args.checkpointep, EPISODES):
         iteration_loss = 0.0
 
-        """Inner adaptation loop"""
-        for j, task_generator in enumerate(training_tasks):
+        """Zip and enumerate everything we need. Zip by itself doesn't slow down anything, so a quick fix for
+            the dataset reload issue.
+        """
+        for j, (task_generator, train_lang, train_lang_low) in \
+                enumerate(zip(training_tasks, train_languages, train_languages_lowercase)):
             learner = meta_m.clone(first_order=True)
 
-            # Sample two batches
             try:
                 support_set = next(task_generator)[0]
-                if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
-                    for mini_epoch in range(UPDATES):
-                        inner_loss = learner.forward(**support_set)["loss"]
-                        learner.adapt(inner_loss, first_order=True)
-                        del inner_loss
-                        torch.cuda.empty_cache()
-                del support_set
             except StopIteration as e:
                 print(f"Exception raised - {e} in support set. Task generator is empty")
+                training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
+                task_generator = training_tasks[j]
+                support_set = next(task_generator)[0]
 
+            if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
+                for mini_epoch in range(UPDATES):
+                    inner_loss = learner.forward(**support_set)["loss"]
+                    learner.adapt(inner_loss, first_order=True)
+                    del inner_loss
+                    torch.cuda.empty_cache()
+            del support_set
             try:
                 query_set = next(task_generator)[0]
-
-                eval_loss = learner.forward(**query_set)["loss"]
-                iteration_loss += eval_loss
-                del eval_loss
-                del learner
-                del query_set
-                torch.cuda.empty_cache()
             except StopIteration as e:
                 print(f"Exception raised -  {e} in query_set")
+                training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
+                task_generator = training_tasks[j]
+                query_set = next(task_generator)[0]
+
+            eval_loss = learner.forward(**query_set)["loss"]
+            iteration_loss += eval_loss
+            del eval_loss
+            del learner
+            del query_set
+            torch.cuda.empty_cache()
+
         # Sum up and normalize over all 7 losses
         iteration_loss /= len(training_tasks)
         optimizer.zero_grad()

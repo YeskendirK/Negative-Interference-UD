@@ -22,10 +22,11 @@ import argparse
 import subprocess
 import json
 import sys
-import os
+import os, glob
 import naming_conventions
 from allennlp.nn import util
 
+from sklearn.metrics.pairwise import cosine_similarity
 #Some commennt
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -97,6 +98,9 @@ def main():
         type=str,
         help="Directory from where to start training. Should be a 'clean' model for MAML and a pretrained model for X-MAML.",
     )
+
+    parser.add_argument("--save_grads_every", default=10, type=int,
+                        help="Save the gradient conflicts every save_every episodes ")
     args = parser.parse_args()
 
     # Yes, i know.
@@ -140,6 +144,7 @@ def main():
     META_LR_DECODER = args.meta_lr_decoder
     META_LR_BERT = args.meta_lr_bert
     SKIP_UPDATE = args.skip_update
+    PRETRAIN_LAN = args.model_dir.split("/")[-2]  # says what language we are using
 
     # Filenames
     MODEL_FILE = (
@@ -218,8 +223,11 @@ def main():
                                     seed=args_.seed, support_set_size=args_.support_set_size)
 
     print(f"BEGINNING THE META TRAIN FROM EPISODE = {args.checkpointep}")
+    # compute graident conflicts
+    cos_matrices = []
     for iteration in range(args.checkpointep, EPISODES):
         iteration_loss = 0.0
+        episode_grads = []  # store the gradients of an episode for all languages
 
         """Zip and enumerate everything we need. Zip by itself doesn't slow down anything, so a quick fix for
             the dataset reload issue.
@@ -230,19 +238,48 @@ def main():
 
             try:
                 support_set = next(task_generator)[0]
+                if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
+                    for mini_epoch in range(UPDATES):
+                        inner_loss = learner.forward(**support_set)["loss"]
+
+                        # compute graident conflicts
+                        grads = autograd.grad(inner_loss, learner.parameters(), create_graph=False, retain_graph=False,
+                                              allow_unused=True)
+
+                        learner.adapt(inner_loss, first_order=True)
+                        del inner_loss
+                        torch.cuda.empty_cache()
+
+                        # compute graident conflicts
+                        if (iteration + 1) % args.save_grads_every == 0:  # NI
+                            new_grads = [g.detach().cpu().reshape(-1) for g in grads if
+                                         type(g) == torch.Tensor]  # filters out None grads
+                            grads_to_save = torch.hstack(new_grads).detach().cpu()  # getting all the parameters
+                            language_grads = torch.cat([language_grads.cpu(), grads_to_save],
+                                                       dim=-1)  # Updates * grad_len in the last update
+
+                            del grads_to_save
+                            del new_grads
+                            torch.cuda.empty_cache()
+
+                del support_set
             except StopIteration as e:
                 print(f"Exception raised - {e} in support set. Task generator is empty")
                 training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
                 task_generator = training_tasks[j]
                 support_set = next(task_generator)[0]
 
-            if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
-                for mini_epoch in range(UPDATES):
-                    inner_loss = learner.forward(**support_set)["loss"]
-                    learner.adapt(inner_loss, first_order=True)
-                    del inner_loss
-                    torch.cuda.empty_cache()
-            del support_set
+
+            if (iteration + 1) % args.save_grads_every == 0:  # NI
+                language_grads = language_grads.reshape(-1, UPDATES)  # setup for taking the average
+
+                if args.accumulation_mode == "mean":
+                    language_grads = torch.mean(language_grads, dim=1)  # number of gradients x 1
+                else:
+                    language_grads = torch.sum(language_grads, dim=1)  # number of gradients x 1
+
+                episode_grads.append(language_grads.detach().cpu().numpy())
+
             try:
                 query_set = next(task_generator)[0]
             except StopIteration as e:
@@ -257,6 +294,13 @@ def main():
             del learner
             del query_set
             torch.cuda.empty_cache()
+
+        if (iteration + 1) % args.save_grads_every == 0:
+            epi_grads = np.array(episode_grads)
+            print("[INFO]: Calculating cosine similarity matrix ...")
+            cos_matrix = cosine_similarity(epi_grads)
+            cos_matrices.append(np.array(cos_matrix))
+            print("Cos matrices shape", np.array(cos_matrices).shape)
 
         # Sum up and normalize over all 7 losses
         iteration_loss /= len(training_tasks)
@@ -283,7 +327,24 @@ def main():
             )
             torch.save(meta_m.module.state_dict(), backup_path)
 
-    print("Done training ... archiving three models!")
+        # NI - Save the gradients in case OOM occurs
+        if (iteration + 1) % args.save_every == 0:  # not to slow down a lot
+
+            file_path_ = f"cos_matrices/temp_allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_order{args.language_order}_acc_mode{args.accumulation_mode}"
+            # Delete the last temp file
+            for filename in glob.glob(f"{file_path_}*"):  # remove the previoustemp grads
+                os.remove(filename)
+
+            np.save(f"{file_path_}_cos_mat{iteration}", np.array(cos_matrices))
+            torch.cuda.empty_cache()
+
+    cos_matrices = np.array(cos_matrices)
+    print(f"[INFO]: Saving the similarity matrix with shape {cos_matrices.shape}")
+    np.save(
+        f"cos_matrices/allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_order{args.language_order}_acc_mode{args.accumulation_mode}_cos_mat{EPISODES}",
+        cos_matrices)
+
+    print("Done training ... archiving three models!") # TODO: What three models?
     for i in [500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
         filename = os.path.join(MODEL_VAL_DIR, "model" + str(i) + ".th")
         if os.path.exists(filename):

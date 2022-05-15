@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#SBATCH --partition=gpu_titanrtx_shared_course
+#SBATCH --gres=gpu:1
+#SBATCH --job-name=meta_experiment
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --time=47:59:00
+#SBATCH --mem=32000M
+#SBATCH --output=meta_train_hindi_pre.out
+
+
+module purge
+module load 2021
+module load Anaconda3/2021.05
+
+# Your job starts in the directory where you call sbatch
+
+# Activate your environment
+cd $HOME/atcs_proj/udify-metalearning
+
+python train_meta.py --inner_lr_decoder 5e-04 --inner_lr_bert 5e-05 --meta_lr_decoder 5e-04 --meta_lr_bert 5e-05 --updates 20 --episodes 500 --support_set_size 20 --model_dir logs/bert_finetune_hindi/2022.05.13_21.00.11 --addenglish True --notaddhindi True
+

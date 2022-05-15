@@ -87,4 +87,4 @@ if args.archive_bert:
     bert_config = "config/archive/bert-base-multilingual-cased/bert_config.json"
     util.archive_bert_model(serialization_dir, bert_config)
 
-util.cleanup_training(serialization_dir, keep_archive=not args.cleanup_archive)
+util.cleanup_training(serialization_dir, keep_archive=not args.cleanup_archive, keep_weights=True)

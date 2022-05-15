@@ -93,7 +93,7 @@ def main():
     )
 
     MODEL_DIR = MODEL_DIR_FINETUNE if args.start_from_pretrain == 0 else MODEL_DIR_PRETRAIN
-
+    print(f"MODEL DIRECTORY = {MODEL_DIR}")
     MODEL_NAMEDIR = (
         args.model_dir.replace("/", "-") + "_" + str(args.episode)
         if args.start_from_pretrain == 0
@@ -130,8 +130,10 @@ def main():
         the_languages_lowercase = validation_languages_lowercase
         extra_string = "metavalidation"
     else:
-        the_languages = languages
-        the_languages_lowercase = languages_lowercase
+        # tiny_ud dataset is not downloading for me, temporarily removing the values
+        the_languages = [x for x in languages if x not in languages_too_small_for_20_batch_20]
+        the_languages_lowercase = [x for x in languages_lowercase if x
+                                    not in languages_too_small_for_20_batch_20_lowercase]
         extra_string = "metatesting"
 
     paramlist = [

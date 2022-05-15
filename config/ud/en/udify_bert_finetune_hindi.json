@@ -1,26 +1,26 @@
 {
-    "dataset_reader": {
-      "lazy": false,
-      "token_indexers": {
-        "tokens": {
-          "type": "single_id",
-          "lowercase_tokens": true
-        },
-        "bert": {
-          "type": "udify-bert-pretrained",
-          "pretrained_model": "config/archive/bert-base-multilingual-cased/vocab.txt",
-          "do_lowercase": false,
-          "use_starting_offsets": true
-        }
+  "dataset_reader": {
+    "lazy": false,
+    "token_indexers": {
+      "tokens": {
+        "type": "single_id",
+        "lowercase_tokens": true
+      },
+      "bert": {
+        "type": "udify-bert-pretrained",
+        "pretrained_model": "config/archive/bert-base-multilingual-cased/vocab.txt",
+        "do_lowercase": false,
+        "use_starting_offsets": true
       }
-    },
-    "train_data_path": "data/ud-treebanks-v2.3/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu",
-    "validation_data_path": "data/ud-treebanks-v2.3/UD_Hindi-HDTB/hi_hdtb-ud-dev.conllu",
-    "test_data_path": "data/ud-treebanks-v2.3/UD_Hindi-HDTB/hi_hdtb-ud-test.conllu",
-    "vocabulary": {
-      "directory_path": "data/vocab/expmix/vocabulary"
-    },
-    "model": {
+    }
+  },
+  "train_data_path": "data/ud-treebanks-v2.3/UD_Hindi-HDTB/hi_hdtb-ud-train.conllu",
+  "validation_data_path": "data/ud-treebanks-v2.3/UD_Hindi-HDTB/hi_hdtb-ud-dev.conllu",
+  "test_data_path": "data/ud-treebanks-v2.3/UD_Hindi-HDTB/hi_hdtb-ud-test.conllu",
+  "vocabulary": {
+    "directory_path": "data/vocab/expmix/vocabulary"
+  },
+  "model": {
       "word_dropout": 0.2,
       "mix_embedding": 12,
       "layer_dropout": 0.1,
@@ -78,11 +78,11 @@
         }
       }
     },
-    "iterator": {
+  "iterator": {
       "batch_size": 16
-    },
-    "trainer": {
-      "num_epochs": 5,
+  },
+  "trainer": {
+      "num_epochs": 60,
       "patience": 40,
       "num_serialized_models_to_keep": 1,
       "should_log_learning_rate": true,
@@ -114,16 +114,16 @@
         "decay_factor": 0.04
       }
     },
-    "udify_replace": [
-      "dataset_reader.token_indexers",
-      "model.text_field_embedder",
-      "model.encoder",
-      "model.decoders.xpos",
-      "model.decoders.deps.encoder",
-      "model.decoders.upos.encoder",
-      "model.decoders.feats.encoder",
-      "model.decoders.lemmas.encoder",
-      "trainer.learning_rate_scheduler",
-      "trainer.optimizer"
-    ]
-  }
+  "udify_replace": [
+    "dataset_reader.token_indexers",
+    "model.text_field_embedder",
+    "model.encoder",
+    "model.decoders.xpos",
+    "model.decoders.deps.encoder",
+    "model.decoders.upos.encoder",
+    "model.decoders.feats.encoder",
+    "model.decoders.lemmas.encoder",
+    "trainer.learning_rate_scheduler",
+    "trainer.optimizer"
+  ]
+}

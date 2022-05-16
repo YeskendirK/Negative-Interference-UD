@@ -3,6 +3,8 @@ __pycache__/
 data/
 logs/
 vocab/
+saved_models/
+cos_matrices/
 
 .DS_Store
 .idea/

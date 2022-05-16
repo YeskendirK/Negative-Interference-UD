@@ -82,7 +82,7 @@
     "batch_size": 16
   },
   "trainer": {
-    "num_epochs": 5,
+    "num_epochs": 60,
     "patience": 40,
     "num_serialized_models_to_keep": 1,
     "should_log_learning_rate": true,

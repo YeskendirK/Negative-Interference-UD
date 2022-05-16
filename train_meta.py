@@ -6,7 +6,7 @@ And validates on Bulgarian
 from get_language_dataset import get_language_dataset
 from get_default_params import get_params
 from udify import util
-from ourmaml import MAML
+from ourmaml import MAML, maml_update
 from udify.predictors import predictor
 from allennlp.common.util import prepare_environment
 from allennlp.models.model import Model
@@ -144,7 +144,7 @@ def main():
     META_LR_DECODER = args.meta_lr_decoder
     META_LR_BERT = args.meta_lr_bert
     SKIP_UPDATE = args.skip_update
-    PRETRAIN_LAN = args.model_dir.split("/")[-2]  # says what language we are using
+    PRETRAIN_LAN = args.model_dir.split("/")[-2] if args.model_dir is not None else "NaN"  # says what language we are using
 
     # Filenames
     MODEL_FILE = (
@@ -235,6 +235,7 @@ def main():
         for j, (task_generator, train_lang, train_lang_low) in \
                 enumerate(zip(training_tasks, train_languages, train_languages_lowercase)):
             learner = meta_m.clone(first_order=True)
+            language_grads = torch.Tensor()
 
             try:
                 support_set = next(task_generator)[0]
@@ -245,8 +246,8 @@ def main():
                         # compute graident conflicts
                         grads = autograd.grad(inner_loss, learner.parameters(), create_graph=False, retain_graph=False,
                                               allow_unused=True)
-
-                        learner.adapt(inner_loss, first_order=True)
+                        maml_update(learner, lr=args.inner_lr_decoder, lr_small=args.inner_lr_bert, grads=grads)
+                        #learner.adapt(inner_loss, first_order=True)
                         del inner_loss
                         torch.cuda.empty_cache()
 
@@ -328,7 +329,7 @@ def main():
             torch.save(meta_m.module.state_dict(), backup_path)
 
         # NI - Save the gradients in case OOM occurs
-        if (iteration + 1) % args.save_every == 0:  # not to slow down a lot
+        if (iteration + 1) % args.save_grads_every == 0:  # not to slow down a lot
 
             file_path_ = f"cos_matrices/temp_allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_order{args.language_order}_acc_mode{args.accumulation_mode}"
             # Delete the last temp file

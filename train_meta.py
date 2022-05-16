@@ -101,6 +101,8 @@ def main():
 
     parser.add_argument("--save_grads_every", default=10, type=int,
                         help="Save the gradient conflicts every save_every episodes ")
+    parser.add_argument("--accumulation_mode", default="sum", type=str,
+                        help="What gradient accumulation strategy to use", choices=["mean", "sum"])
     args = parser.parse_args()
 
     # Yes, i know.
@@ -226,6 +228,22 @@ def main():
     # compute graident conflicts
     cos_matrices = []
     for iteration in range(args.checkpointep, EPISODES):
+
+        print(f"[INFO]: Starting episode {iteration}\n", flush=True)
+
+        t = torch.cuda.get_device_properties(0).total_memory
+        r = torch.cuda.memory_reserved(0)
+        r_max = torch.cuda.max_memory_reserved(0)
+        a = torch.cuda.memory_allocated(0)
+        a_max = torch.cuda.max_memory_allocated(0)
+        f = r - a  # free inside reserved
+
+        print(f'\ntotal     : {t}')
+        print(f'reserved  : {r}, max_reserved  : {r_max}')
+        print(f'allocated : {a}, max_allocated : {a_max}')
+        print(f'free      : {f}\n')
+
+
         iteration_loss = 0.0
         episode_grads = []  # store the gradients of an episode for all languages
 
@@ -256,6 +274,7 @@ def main():
                             new_grads = [g.detach().cpu().reshape(-1) for g in grads if
                                          type(g) == torch.Tensor]  # filters out None grads
                             grads_to_save = torch.hstack(new_grads).detach().cpu()  # getting all the parameters
+                            # grads_to_save = torch.cat(new_grads, dim=-1).detach().cpu()  # getting all the parameters
                             language_grads = torch.cat([language_grads.cpu(), grads_to_save],
                                                        dim=-1)  # Updates * grad_len in the last update
 
@@ -263,13 +282,15 @@ def main():
                             del new_grads
                             torch.cuda.empty_cache()
 
-                del support_set
+
             except StopIteration as e:
                 print(f"Exception raised - {e} in support set. Task generator is empty")
                 training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
                 task_generator = training_tasks[j]
                 support_set = next(task_generator)[0]
 
+            del support_set
+            torch.cuda.empty_cache()
 
             if (iteration + 1) % args.save_grads_every == 0:  # NI
                 language_grads = language_grads.reshape(-1, UPDATES)  # setup for taking the average
@@ -331,10 +352,11 @@ def main():
         # NI - Save the gradients in case OOM occurs
         if (iteration + 1) % args.save_grads_every == 0:  # not to slow down a lot
 
-            file_path_ = f"cos_matrices/temp_allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_order{args.language_order}_acc_mode{args.accumulation_mode}"
+            file_path_ = f"cos_matrices/temp_allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_" \
+                         f"suppSize{args.support_set_size}_acc_mode{args.accumulation_mode}_iter{iteration + 1}"
             # Delete the last temp file
-            for filename in glob.glob(f"{file_path_}*"):  # remove the previoustemp grads
-                os.remove(filename)
+            # for filename in glob.glob(f"{file_path_}*"):  # remove the previoustemp grads
+            #     os.remove(filename)
 
             np.save(f"{file_path_}_cos_mat{iteration}", np.array(cos_matrices))
             torch.cuda.empty_cache()
@@ -342,11 +364,11 @@ def main():
     cos_matrices = np.array(cos_matrices)
     print(f"[INFO]: Saving the similarity matrix with shape {cos_matrices.shape}")
     np.save(
-        f"cos_matrices/allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_order{args.language_order}_acc_mode{args.accumulation_mode}_cos_mat{EPISODES}",
+        f"cos_matrices/allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_acc_mode{args.accumulation_mode}_cos_mat{EPISODES}",
         cos_matrices)
 
     print("Done training ... archiving three models!") # TODO: What three models?
-    for i in [500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
+    for i in [10, 50, 500, 600, 900, 1200, 1500, 1800, 2000, 1500]: # TODO: Added 10,50 for debugging
         filename = os.path.join(MODEL_VAL_DIR, "model" + str(i) + ".th")
         if os.path.exists(filename):
             save_place = MODEL_VAL_DIR + "/" + str(i)
@@ -357,6 +379,7 @@ def main():
                 files_to_archive=train_params.files_to_archive,
                 archive_path=save_place,
             )
+            print("archieved to save_place: ", save_place)
     subprocess.run(["rm", MODEL_VAL_DIR + "/best.th"])
 
 

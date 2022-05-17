@@ -23,6 +23,8 @@ import subprocess
 import json
 import sys
 import os, glob
+import random
+from pathlib import Path
 import naming_conventions
 from allennlp.nn import util
 
@@ -254,10 +256,12 @@ def main():
                 enumerate(zip(training_tasks, train_languages, train_languages_lowercase)):
             learner = meta_m.clone(first_order=True)
             language_grads = torch.Tensor()
-
+            num_grad_samples = min(4, UPDATES)
             try:
                 support_set = next(task_generator)[0]
                 if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
+
+                    epochs_grad_conflict = random.sample(range(UPDATES), k=num_grad_samples) # random.randint(0, UPDATES-1)
                     for mini_epoch in range(UPDATES):
                         inner_loss = learner.forward(**support_set)["loss"]
 
@@ -270,13 +274,16 @@ def main():
                         torch.cuda.empty_cache()
 
                         # compute graident conflicts
-                        if (iteration + 1) % args.save_grads_every == 0:  # NI
+                        compute_grad_conflict = mini_epoch in epochs_grad_conflict
+
+                        if (iteration + 1) % args.save_grads_every == 0 and compute_grad_conflict:  # NI
                             new_grads = [g.detach().cpu().reshape(-1) for g in grads if
                                          type(g) == torch.Tensor]  # filters out None grads
                             grads_to_save = torch.hstack(new_grads).detach().cpu()  # getting all the parameters
                             # grads_to_save = torch.cat(new_grads, dim=-1).detach().cpu()  # getting all the parameters
                             language_grads = torch.cat([language_grads.cpu(), grads_to_save],
                                                        dim=-1)  # Updates * grad_len in the last update
+
 
                             del grads_to_save
                             del new_grads
@@ -293,7 +300,7 @@ def main():
             torch.cuda.empty_cache()
 
             if (iteration + 1) % args.save_grads_every == 0:  # NI
-                language_grads = language_grads.reshape(-1, UPDATES)  # setup for taking the average
+                language_grads = language_grads.reshape(-1, num_grad_samples)  # setup for taking the average
 
                 if args.accumulation_mode == "mean":
                     language_grads = torch.mean(language_grads, dim=1)  # number of gradients x 1
@@ -322,7 +329,9 @@ def main():
             print("[INFO]: Calculating cosine similarity matrix ...")
             cos_matrix = cosine_similarity(epi_grads)
             cos_matrices.append(np.array(cos_matrix))
+
             print("Cos matrices shape", np.array(cos_matrices).shape)
+
 
         # Sum up and normalize over all 7 losses
         iteration_loss /= len(training_tasks)
@@ -341,7 +350,7 @@ def main():
         torch.cuda.empty_cache()
 
         # Saving the 250th episode as oom errors are appearing in lisa
-        if iteration + 1 in [250, 500, 1500, 2000] and not (
+        if iteration + 1 in [10, 250, 500, 1500, 2000] and not (
             iteration + 1 == 500 and DOING_MAML
         ):
             backup_path = os.path.join(
@@ -351,21 +360,25 @@ def main():
 
         # NI - Save the gradients in case OOM occurs
         if (iteration + 1) % args.save_grads_every == 0:  # not to slow down a lot
-
-            file_path_ = f"cos_matrices/temp_allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_" \
+            cos_dir = f"cos_matrices/{args.name}"
+            Path(cos_dir).mkdir(parents=True, exist_ok=True)
+            file_path_ = f"cos_matrices/{args.name}/temp_allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_" \
                          f"suppSize{args.support_set_size}_acc_mode{args.accumulation_mode}_iter{iteration + 1}"
             # Delete the last temp file
-            # for filename in glob.glob(f"{file_path_}*"):  # remove the previoustemp grads
-            #     os.remove(filename)
+            for filename in glob.glob(f"{file_path_}*"):  # remove the previoustemp grads
+                os.remove(filename)
 
             np.save(f"{file_path_}_cos_mat{iteration}", np.array(cos_matrices))
             torch.cuda.empty_cache()
 
     cos_matrices = np.array(cos_matrices)
     print(f"[INFO]: Saving the similarity matrix with shape {cos_matrices.shape}")
+    cos_dir = f"cos_matrices/{args.name}"
+    Path(cos_dir).mkdir(parents=True, exist_ok=True)
     np.save(
-        f"cos_matrices/allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_acc_mode{args.accumulation_mode}_cos_mat{EPISODES}",
+        f"cos_matrices/{args.name}/allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_acc_mode{args.accumulation_mode}_cos_mat{EPISODES}",
         cos_matrices)
+
 
     print("Done training ... archiving three models!") # TODO: What three models?
     for i in [10, 50, 500, 600, 900, 1200, 1500, 1800, 2000, 1500]: # TODO: Added 10,50 for debugging

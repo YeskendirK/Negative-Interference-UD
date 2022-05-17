@@ -160,12 +160,6 @@ def main():
             else "logs/english_expmix_tiny_deps2/2020.05.29_17.59.31"
         )
     )
-    train_params = get_params("metalearning", args.seed)
-
-    m = Model.load(
-        train_params,
-        MODEL_FILE,
-    )
 
     maml_string = "saved_models/MAML" if DOING_MAML else "saved_models/XMAML"
     param_list = [
@@ -231,19 +225,7 @@ def main():
     cos_matrices = []
     for iteration in range(args.checkpointep, EPISODES):
 
-        print(f"[INFO]: Starting episode {iteration}\n", flush=True)
-
-        t = torch.cuda.get_device_properties(0).total_memory
-        r = torch.cuda.memory_reserved(0)
-        r_max = torch.cuda.max_memory_reserved(0)
-        a = torch.cuda.memory_allocated(0)
-        a_max = torch.cuda.max_memory_allocated(0)
-        f = r - a  # free inside reserved
-
-        print(f'\ntotal     : {t}')
-        print(f'reserved  : {r}, max_reserved  : {r_max}')
-        print(f'allocated : {a}, max_allocated : {a_max}')
-        print(f'free      : {f}\n')
+        # print(f"[INFO]: Starting episode {iteration}\n", flush=True)
 
 
         iteration_loss = 0.0
@@ -252,16 +234,17 @@ def main():
         """Zip and enumerate everything we need. Zip by itself doesn't slow down anything, so a quick fix for
             the dataset reload issue.
         """
+        num_grad_samples = min(4, UPDATES)
+        epochs_grad_conflict = random.sample(range(UPDATES), k=num_grad_samples)  # random.randint(0, UPDATES-1)
         for j, (task_generator, train_lang, train_lang_low) in \
                 enumerate(zip(training_tasks, train_languages, train_languages_lowercase)):
             learner = meta_m.clone(first_order=True)
             language_grads = torch.Tensor()
-            num_grad_samples = min(4, UPDATES)
+
             try:
                 support_set = next(task_generator)[0]
                 if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
 
-                    epochs_grad_conflict = random.sample(range(UPDATES), k=num_grad_samples) # random.randint(0, UPDATES-1)
                     for mini_epoch in range(UPDATES):
                         inner_loss = learner.forward(**support_set)["loss"]
 
@@ -326,6 +309,10 @@ def main():
 
         if (iteration + 1) % args.save_grads_every == 0:
             epi_grads = np.array(episode_grads)
+            print(epi_grads.shape)
+            episode_grads_shapes = [x.shape for x in episode_grads]
+            print(episode_grads_shapes)
+            print(len(episode_grads))
             print("[INFO]: Calculating cosine similarity matrix ...")
             cos_matrix = cosine_similarity(epi_grads)
             cos_matrices.append(np.array(cos_matrix))
@@ -350,7 +337,7 @@ def main():
         torch.cuda.empty_cache()
 
         # Saving the 250th episode as oom errors are appearing in lisa
-        if iteration + 1 in [10, 250, 500, 1500, 2000] and not (
+        if iteration + 1 in [250, 500, 1500, 2000] and not (
             iteration + 1 == 500 and DOING_MAML
         ):
             backup_path = os.path.join(
@@ -380,8 +367,8 @@ def main():
         cos_matrices)
 
 
-    print("Done training ... archiving three models!") # TODO: What three models?
-    for i in [10, 50, 500, 600, 900, 1200, 1500, 1800, 2000, 1500]: # TODO: Added 10,50 for debugging
+    print("Done training ... archiving three models!")
+    for i in [500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
         filename = os.path.join(MODEL_VAL_DIR, "model" + str(i) + ".th")
         if os.path.exists(filename):
             save_place = MODEL_VAL_DIR + "/" + str(i)

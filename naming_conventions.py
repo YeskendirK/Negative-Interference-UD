@@ -6,11 +6,11 @@ Used for automatically printing tables and iterating over all train data.
 train_languages = [
     "UD_Arabic-PADT",
     "UD_Czech-PDT",
-    # "UD_Italian-ISDT",
-    # "UD_Norwegian-Nynorsk",
-    # "UD_Russian-SynTagRus",
-    # "UD_Hindi-HDTB",
-    # "UD_Korean-Kaist",
+    "UD_Italian-ISDT",
+    "UD_Norwegian-Nynorsk",
+    "UD_Russian-SynTagRus",
+    "UD_Hindi-HDTB",
+    "UD_Korean-Kaist",
 ]
 
 train_languages_readable = [
@@ -27,11 +27,11 @@ train_languages_readable = [
 train_languages_lowercase = [
     "ar_padt-ud",
     "cs_pdt-ud",
-    # "it_isdt-ud",
-    # "no_nynorsk-ud",
-    # "ru_syntagrus-ud",
-    # "hi_hdtb-ud",
-    # "ko_kaist-ud",
+    "it_isdt-ud",
+    "no_nynorsk-ud",
+    "ru_syntagrus-ud",
+    "hi_hdtb-ud",
+    "ko_kaist-ud",
 ]
 
 validation_languages = ["UD_Bulgarian-BTB", "UD_Telugu-MTG"]

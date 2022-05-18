@@ -101,7 +101,6 @@ my_order2 = [
 ]
 
 languages = [
-    "UD_Breton-KEB",
     "UD_Arabic-PADT",
     "UD_Armenian-ArmTDP",
     "UD_Bulgarian-BTB",

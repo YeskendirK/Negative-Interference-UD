@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#SBATCH --partition=gpu_titanrtx_shared_course
+#SBATCH --gres=gpu:1
+#SBATCH --job-name=MetaTesttitan
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=3
+#SBATCH --time=10:00:00
+#SBATCH --mem=32000M
+#SBATCH --output=metatesthindijob.out
+
+module purge
+module load 2021
+module load Anaconda3/2021.05
+
+cd $HOME/atcs_proj/udify-metalearning
+python metatest_all.py --lr_decoder 0.0001 --lr_bert 1e-04 --updates 20 --support_set_size 20 --optimizer sgd --seed 3 --episode 500 --model_dir saved_models/XMAML_0.0005_5e-05_0.0005_5e-05_20_9999
+# python pretrain.py

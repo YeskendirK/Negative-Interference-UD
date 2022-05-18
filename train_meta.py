@@ -225,6 +225,15 @@ def main():
             del eval_loss
             del learner
             del query_set
+            #store gradients of every loss in the task
+            gradient = torch.autograd.grad(iteration_loss, meta_m.parameters())
+            #update the parameters of the meta-learner
+            for param, grad in zip(meta_m.parameters(), gradient):
+                param.grad = grad
+            #define a loss which measures the difference between the multi-tasks loss and the meta-learner loss
+            loss_diff = iteration_loss - meta_m.forward(**query_set)["loss"]
+            def mitigiate_negative_inteference(learner.forward(**query_set)['loss'])
+                
             torch.cuda.empty_cache()
 
         # Sum up and normalize over all 7 losses

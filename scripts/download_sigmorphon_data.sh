@@ -16,4 +16,4 @@ echo "Generating multilingual dataset..."
 
 mkdir -p "data/sigmorphon-2019/multilingual"
 
-python concat_treebanks.py data/sigmorphon-2019/multilingual --dataset_dir ${DATASET_DIR}
+# python concat_treebanks.py data/sigmorphon-2019/multilingual --dataset_dir ${DATASET_DIR}

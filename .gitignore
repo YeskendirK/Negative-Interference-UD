@@ -3,6 +3,10 @@ __pycache__/
 data/
 logs/
 vocab/
+saved_models/
+cos_matrices/
+visualizations/
+.ipynb_checkpoints/
 
 .DS_Store
-idea/
+.idea/

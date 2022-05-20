@@ -103,6 +103,7 @@ my_order2 = [
 languages = [
     "UD_Arabic-PADT",
     "UD_Armenian-ArmTDP",
+    "UD_Breton-KEB",
     "UD_Bulgarian-BTB",
     "UD_Buryat-BDT",
     "UD_Czech-PDT",
@@ -177,9 +178,9 @@ languages_readable = [
 ]
 
 languages_lowercase = [
-    "br_keb-ud",
     "ar_padt-ud",
     "hy_armtdp-ud",
+    "br_keb-ud",
     "bg_btb-ud",
     "bxr_bdt-ud",
     "cs_pdt-ud",

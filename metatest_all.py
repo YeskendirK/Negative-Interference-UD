@@ -87,7 +87,7 @@ def main():
     args = parser.parse_args()
 
     # The model on which to Meta_test
-    MODEL_DIR_PRETRAIN = "logs/english_expmix_deps/2020.05.17_01.08.52/"
+    MODEL_DIR_PRETRAIN = args.model_dir
     MODEL_DIR_FINETUNE = os.path.join(
         args.model_dir, str(args.episode) if args.episode is not None else ""
     )
@@ -131,9 +131,14 @@ def main():
         extra_string = "metavalidation"
     else:
         # tiny_ud dataset is not downloading for me, temporarily removing the values
-        the_languages = [x for x in languages if x not in languages_too_small_for_20_batch_20]
-        the_languages_lowercase = [x for x in languages_lowercase if x
-                                    not in languages_too_small_for_20_batch_20_lowercase]
+        # the_languages = [x for x in languages if x not in languages_too_small_for_20_batch_20]
+        # the_languages_lowercase = [x for x in languages_lowercase if x
+        #                             not in languages_too_small_for_20_batch_20_lowercase]
+        the_languages = languages
+        the_languages_lowercase = languages_lowercase
+
+
+
         extra_string = "metatesting"
 
     paramlist = [

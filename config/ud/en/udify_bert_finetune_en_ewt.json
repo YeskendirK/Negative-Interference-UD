@@ -18,7 +18,7 @@
   "validation_data_path": "data/ud-treebanks-v2.3/UD_English-EWT/en_ewt-ud-dev.conllu",
   "test_data_path": "data/ud-treebanks-v2.3/UD_English-EWT/en_ewt-ud-test.conllu",
   "vocabulary": {
-    "directory_path": "data/vocab/expmix/vocabulary"
+    "directory_path": "data/concat-exp-mix/vocab/concat-exp-mix/vocabulary"
   },
   "model": {
     "word_dropout": 0.2,
@@ -82,7 +82,7 @@
     "batch_size": 16
   },
   "trainer": {
-    "num_epochs": 5,
+    "num_epochs": 60,
     "patience": 40,
     "num_serialized_models_to_keep": 1,
     "should_log_learning_rate": true,

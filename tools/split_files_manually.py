@@ -4,6 +4,7 @@ Split test files for language that only have a test set, such as Swedish, Faroes
 import argparse
 import os
 import random
+from pathlib import Path
 from typing import Dict, Tuple, List, Any, Callable
 
 
@@ -20,8 +21,10 @@ parser.add_argument("--batch_size", default=20, type=int, help="How big is each 
 parser.add_argument("--seed", default=2002, type=int, help="Seed for the shuffler")
 
 args = parser.parse_args()
+log_dir = f"data/ud-tiny-treebanks/size{args.batch_size}"
+Path(log_dir).mkdir(parents=True, exist_ok=True)
 output_filename = os.path.join(
-    "../data/ud-tiny-treebanks/size" + str(args.batch_size),
+    "data/ud-tiny-treebanks/size" + str(args.batch_size),
     args.file.strip("-test.conllu").split("/")[-1],
 )
 
@@ -37,14 +40,14 @@ for i in range(args.amt):
     test = annotations[args.batch_size :]
 
     # new Dev
-    with open(output_filename + "-dev" + str(i) + ".conllu", "w") as f:
+    with open(output_filename + "-dev" + str(i) + ".conllu", "w+") as f:
         for z in development:
             for line in z:
                 f.write(line)
                 f.write("\n")
             f.write("\n")
     # new Test
-    with open(output_filename + "-test" + str(i) + ".conllu", "w") as f:
+    with open(output_filename + "-test" + str(i) + ".conllu", "w+") as f:
         for z in test:
             for line in z:
                 f.write(line)

@@ -166,6 +166,7 @@ def main():
         str(z)
         for z in [
             maml_string,
+            PRETRAIN_LAN,
             INNER_LR_DECODER,
             INNER_LR_BERT,
             META_LR_DECODER,
@@ -243,41 +244,41 @@ def main():
 
             try:
                 support_set = next(task_generator)[0]
-                if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
-
-                    for mini_epoch in range(UPDATES):
-                        inner_loss = learner.forward(**support_set)["loss"]
-
-                        # compute graident conflicts
-                        grads = autograd.grad(inner_loss, learner.parameters(), create_graph=False, retain_graph=False,
-                                              allow_unused=True)
-                        maml_update(learner, lr=args.inner_lr_decoder, lr_small=args.inner_lr_bert, grads=grads)
-                        #learner.adapt(inner_loss, first_order=True)
-                        del inner_loss
-                        torch.cuda.empty_cache()
-
-                        # compute graident conflicts
-                        compute_grad_conflict = mini_epoch in epochs_grad_conflict
-
-                        if (iteration + 1) % args.save_grads_every == 0 and compute_grad_conflict:  # NI
-                            new_grads = [g.detach().cpu().reshape(-1) for g in grads if
-                                         type(g) == torch.Tensor]  # filters out None grads
-                            grads_to_save = torch.hstack(new_grads).detach().cpu()  # getting all the parameters
-                            # grads_to_save = torch.cat(new_grads, dim=-1).detach().cpu()  # getting all the parameters
-                            language_grads = torch.cat([language_grads.cpu(), grads_to_save],
-                                                       dim=-1)  # Updates * grad_len in the last update
-
-
-                            del grads_to_save
-                            del new_grads
-                            torch.cuda.empty_cache()
-
-
             except StopIteration as e:
                 print(f"Exception raised - {e} in support set. Task generator is empty")
                 training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
                 task_generator = training_tasks[j]
                 support_set = next(task_generator)[0]
+
+            if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
+
+                for mini_epoch in range(UPDATES):
+                    inner_loss = learner.forward(**support_set)["loss"]
+
+                    # compute graident conflicts
+                    grads = autograd.grad(inner_loss, learner.parameters(), create_graph=False, retain_graph=False,
+                                          allow_unused=True)
+                    maml_update(learner, lr=args.inner_lr_decoder, lr_small=args.inner_lr_bert, grads=grads)
+                    #learner.adapt(inner_loss, first_order=True)
+                    del inner_loss
+                    torch.cuda.empty_cache()
+
+                    # compute graident conflicts
+                    compute_grad_conflict = mini_epoch in epochs_grad_conflict
+
+                    if (iteration + 1) % args.save_grads_every == 0 and compute_grad_conflict:  # NI
+                        new_grads = [g.detach().cpu().reshape(-1) for g in grads if
+                                     type(g) == torch.Tensor]  # filters out None grads
+                        grads_to_save = torch.hstack(new_grads).detach().cpu()  # getting all the parameters
+                        # grads_to_save = torch.cat(new_grads, dim=-1).detach().cpu()  # getting all the parameters
+                        language_grads = torch.cat([language_grads.cpu(), grads_to_save],
+                                                   dim=-1)  # Updates * grad_len in the last update
+
+
+                        del grads_to_save
+                        del new_grads
+                        torch.cuda.empty_cache()
+
 
             del support_set
             torch.cuda.empty_cache()

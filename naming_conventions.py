@@ -219,7 +219,9 @@
 The filenames have some odd naming conventions sometimes.
 Used for automatically printing tables and iterating over all train data.
 """
-
+#below are russian indices 
+#0,1,2,3,5,6
+#0,1,2,3,5,6 
 train_languages = [
     "UD_Arabic-PADT",
     "UD_Czech-PDT",

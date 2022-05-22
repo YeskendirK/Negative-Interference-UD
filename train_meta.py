@@ -110,7 +110,7 @@ def main():
     hindi_indices = [0, 1, 2, 3, 4, 6]
     italian_indices = [0, 1, 3, 4, 5, 6]
     czech_indices = [0, 2, 3, 4, 5, 6]
-    russian_indices = 
+    russian_indices = [0, 2, 3, 4, 5, 6]
     if args.notaddhindi:
         train_languages = train_languages[hindi_indices]
         train_languages_lowercase = train_languages_lowercase[hindi_indices]

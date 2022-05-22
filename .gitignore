@@ -7,3 +7,7 @@ vocab/
 .DS_Store
 idea/
 saved_models
+cmds/
+cos_matrices/
+metavalidation_0.0001_0.0001_20_20_sgd_ONLY/
+metavalidation_0.0001_0.0001_20_20_sgd_saved_models-XMAML_0.001_0.0001_0.0005_1e-05_20_9999english_meta_train_3_500/

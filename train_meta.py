@@ -28,6 +28,9 @@ from pathlib import Path
 import naming_conventions
 from allennlp.nn import util
 
+
+from allennlp.nn.util import move_to_device
+
 from sklearn.metrics.pairwise import cosine_similarity
 #Some commennt
 
@@ -107,11 +110,12 @@ def main():
                         help="What gradient accumulation strategy to use", choices=["mean", "sum"])
     args = parser.parse_args()
 
-    # Yes, i know.
+    device_num = 0 if torch.cuda.is_available() else -1 #torch.device('cuda')
+
     training_tasks = []
     train_languages = np.array(naming_conventions.train_languages)
     train_languages_lowercase = np.array(naming_conventions.train_languages_lowercase)
-    # The 6th indice seems to be causing a problem, removing it for now
+
     hindi_indices = [0, 1, 2, 3, 4, 6]
     italian_indices = [0, 1, 3, 4, 5, 6]
     czech_indices = [0, 2, 3, 4, 5, 6]
@@ -250,6 +254,7 @@ def main():
                 task_generator = training_tasks[j]
                 support_set = next(task_generator)[0]
 
+            support_set = move_to_device(support_set, device_num)
             if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
 
                 for mini_epoch in range(UPDATES):
@@ -301,6 +306,7 @@ def main():
                 task_generator = training_tasks[j]
                 query_set = next(task_generator)[0]
 
+            query_set = move_to_device(query_set, device_num)
             eval_loss = learner.forward(**query_set)["loss"]
             iteration_loss += eval_loss
             del eval_loss

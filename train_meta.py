@@ -375,7 +375,7 @@ def main():
 
 
     print("Done training ... archiving three models!")
-    for i in [500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
+    for i in [250, 500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
         filename = os.path.join(MODEL_VAL_DIR, "model" + str(i) + ".th")
         if os.path.exists(filename):
             save_place = MODEL_VAL_DIR + "/" + str(i)
@@ -383,7 +383,7 @@ def main():
             subprocess.run(["mkdir", save_place])
             archive_model(
                 MODEL_VAL_DIR,
-                files_to_archive=train_params.files_to_archive,
+                # files_to_archive=train_params.files_to_archive,
                 archive_path=save_place,
             )
             print("archieved to save_place: ", save_place)

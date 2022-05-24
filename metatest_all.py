@@ -89,13 +89,14 @@ def main():
     # The model on which to Meta_test
     MODEL_DIR_PRETRAIN = args.model_dir
     MODEL_DIR_FINETUNE = os.path.join(
-        args.model_dir, str(args.episode) if args.episode is not None else ""
+        args.model_dir, str(args.episode) if args.episode is not None else "best"
     )
 
     MODEL_DIR = MODEL_DIR_FINETUNE if args.start_from_pretrain == 0 else MODEL_DIR_PRETRAIN
     print(f"MODEL DIRECTORY = {MODEL_DIR}")
+    suffix_str = str(args.episode) if args.episode is not None else "best"
     MODEL_NAMEDIR = (
-        args.model_dir.replace("/", "-") + "_" + str(args.episode)
+        args.model_dir.replace("/", "-") + "_" + suffix_str
         if args.start_from_pretrain == 0
         else "ONLY"
     )

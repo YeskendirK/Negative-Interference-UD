@@ -219,7 +219,7 @@ def main():
         META_LR_DECODER,
     )  # , weight_decay=0.01)
 
-    scheduler = get_cosine_schedule_with_warmup(optimizer, 50, 500)
+    scheduler = get_cosine_schedule_with_warmup(optimizer, 0.1*EPISODES, EPISODES)
 
     def restart_iter(language, language_lowercase_, args_):
         return get_language_dataset(language, language_lowercase_,
@@ -228,6 +228,7 @@ def main():
     print(f"BEGINNING THE META TRAIN FROM EPISODE = {args.checkpointep}")
     # compute graident conflicts
     cos_matrices = []
+    lowest_iteration_loss = 1e10
     for iteration in range(args.checkpointep, EPISODES):
 
         # print(f"[INFO]: Starting episode {iteration}\n", flush=True)
@@ -334,6 +335,15 @@ def main():
         optimizer.step()
         scheduler.step()
 
+        # Save best model
+        if iteration_loss < lowest_iteration_loss:
+            best_model_path = os.path.join(MODEL_VAL_DIR, "best_model.th")
+            print(f"BEST Model updated on {iteration} epoch")
+            print(f"Min. Loss decreased from {lowest_iteration_loss} to {iteration_loss}")
+            torch.save(meta_m.module.state_dict(), best_model_path)
+
+            lowest_iteration_loss = iteration_loss
+
         # Bookkeeping
         with torch.no_grad():
             print(iteration, "meta", iteration_loss.item())
@@ -344,7 +354,7 @@ def main():
         torch.cuda.empty_cache()
 
         # Saving the 250th episode as oom errors are appearing in lisa
-        if iteration + 1 in [250, 500, 1500, 2000] and not (
+        if iteration + 1 in [1, 10, 100, 250, 500, 1500, 2000] and not (
             iteration + 1 == 500 and DOING_MAML
         ):
             backup_path = os.path.join(
@@ -375,7 +385,7 @@ def main():
 
 
     print("Done training ... archiving three models!")
-    for i in [250, 500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
+    for i in [1, 10, 100, 250, 500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
         filename = os.path.join(MODEL_VAL_DIR, "model" + str(i) + ".th")
         if os.path.exists(filename):
             save_place = MODEL_VAL_DIR + "/" + str(i)
@@ -387,6 +397,20 @@ def main():
                 archive_path=save_place,
             )
             print("archieved to save_place: ", save_place)
+    best_model_filename = os.path.join(MODEL_VAL_DIR, "best_model.th")
+
+    # Archive best model
+    if os.path.exists(best_model_filename):
+        save_place = MODEL_VAL_DIR + "/" + 'best'
+        subprocess.run(["mv", best_model_filename, MODEL_VAL_DIR + "/best.th"])
+        subprocess.run(["mkdir", save_place])
+        archive_model(
+            MODEL_VAL_DIR,
+            # files_to_archive=train_params.files_to_archive,
+            archive_path=save_place,
+        )
+        print("BEST model archieved to save_place: ", save_place)
+
     subprocess.run(["rm", MODEL_VAL_DIR + "/best.th"])
 
 

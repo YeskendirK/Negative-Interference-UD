@@ -175,7 +175,8 @@ def get_language_dataset(
     
     # for dataset in raw_train_generator.values():
     
-    vocab = Vocabulary.from_files('data/vocab/english_only_expmix4/vocabulary')
+    # vocab = Vocabulary.from_files('data/vocab/english_only_expmix4/vocabulary')
+    vocab = Vocabulary.from_files('data/vocab/expmix/vocabulary')
     raw_train_generator.index_with(vocab)
     from allennlp.data import allennlp_collate
     # Construct a dataloader directly for a dataset which contains allennlp

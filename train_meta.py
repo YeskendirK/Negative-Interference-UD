@@ -4,6 +4,8 @@ This file Meta-Trains on 7 languages
 And validates on Bulgarian
 """
 from get_language_dataset import get_language_dataset
+# from get_language_dataset_last_year import get_language_dataset
+
 from get_default_params import get_params
 from udify import util
 from ourmaml import MAML, maml_update
@@ -206,7 +208,7 @@ def main():
     if args.resume:
         model_state = torch.load(args.resume)
         meta_m.module.load_state_dict(model_state)
-    meta_m.cuda()
+    # meta_m.cuda()
     optimizer = Adam(
         [
             {
@@ -249,13 +251,17 @@ def main():
 
             try:
                 support_set = next(task_generator)[0]
+
             except StopIteration as e:
                 print(f"Exception raised - {e} in support set. Task generator is empty")
                 training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
                 task_generator = training_tasks[j]
                 support_set = next(task_generator)[0]
-
-            support_set = move_to_device(support_set, device_num)
+            print("SUPPORT SET metadata len = ", len(support_set['metadata']))
+            print(support_set['metadata'])
+            print("-"*20)
+            print("-" * 20)
+            # support_set = move_to_device(support_set, device_num)
             if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
 
                 for mini_epoch in range(UPDATES):
@@ -306,8 +312,10 @@ def main():
                 training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
                 task_generator = training_tasks[j]
                 query_set = next(task_generator)[0]
-
-            query_set = move_to_device(query_set, device_num)
+            print("QUERY SET len = ", len(query_set))
+            print(query_set)
+            print("="*20)
+            # query_set = move_to_device(query_set, device_num)
             eval_loss = learner.forward(**query_set)["loss"]
             iteration_loss += eval_loss
             del eval_loss

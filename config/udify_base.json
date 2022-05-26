@@ -15,7 +15,8 @@
     }
   },
   "vocabulary": {
-    "directory_path": "data/vocab/UD_English-EWT/vocabulary",
+//    "directory_path": "data/vocab/UD_English-EWT/vocabulary",
+    "directory_path": "data/vocab/expmix/vocabulary",
     "non_padded_namespaces": ["upos", "xpos", "feats", "lemmas", "*tags", "*labels"]
   },
   "train_data_path": "data/ud-treebanks-v2.3/UD_English-EWT/en_ewt-ud-train.conllu",

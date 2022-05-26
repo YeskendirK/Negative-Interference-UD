@@ -18,7 +18,9 @@
   "validation_data_path": "data/ud-treebanks-v2.3/UD_English-EWT/en_ewt-ud-dev.conllu",
   "test_data_path": "data/ud-treebanks-v2.3/UD_English-EWT/en_ewt-ud-test.conllu",
   "vocabulary": {
-    "directory_path": "data/vocab/expmix/vocabulary"
+    "directory_path": "data/vocab/expmix/vocabulary",
+    "non_padded_namespaces": ["upos", "xpos", "feats", "lemmas", "*tags", "*labels", "bert"]
+
   },
   "model": {
     "word_dropout": 0.2,

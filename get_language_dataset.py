@@ -111,10 +111,8 @@ def get_language_dataset(
 
     iterator_params = {
         "batch_size": support_set_size,
-        "maximum_samples_per_batch": [
-            "num_tokens",
-            support_set_size * 128,
-        ],  # Unfortunately necessary
+        # "maximum_samples_per_batch": [ "num_tokens", support_set_size * 256,
+        # ],  # Unfortunately necessary
     }
 
     if validate:

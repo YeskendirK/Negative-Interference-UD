@@ -3,6 +3,9 @@
 This file Meta-Trains on 7 languages
 And validates on Bulgarian
 """
+import wandb
+wandb.init(project="MetaTrainHindi")
+
 from get_language_dataset import get_language_dataset
 from get_default_params import get_params
 from udify import util
@@ -106,7 +109,7 @@ def main():
     parser.add_argument("--accumulation_mode", default="sum", type=str,
                         help="What gradient accumulation strategy to use", choices=["mean", "sum"])
     args = parser.parse_args()
-
+    print("parsing done")
     # Yes, i know.
     training_tasks = []
     train_languages = np.array(naming_conventions.train_languages)
@@ -166,6 +169,7 @@ def main():
         str(z)
         for z in [
             maml_string,
+            PRETRAIN_LAN,
             INNER_LR_DECODER,
             INNER_LR_BERT,
             META_LR_DECODER,
@@ -221,13 +225,12 @@ def main():
                                     seed=args_.seed, support_set_size=args_.support_set_size)
 
     print(f"BEGINNING THE META TRAIN FROM EPISODE = {args.checkpointep}")
+    wandb.watch(meta_m, log='all')
     # compute graident conflicts
     cos_matrices = []
     for iteration in range(args.checkpointep, EPISODES):
 
         # print(f"[INFO]: Starting episode {iteration}\n", flush=True)
-
-
         iteration_loss = 0.0
         episode_grads = []  # store the gradients of an episode for all languages
 
@@ -243,41 +246,42 @@ def main():
 
             try:
                 support_set = next(task_generator)[0]
-                if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
-
-                    for mini_epoch in range(UPDATES):
-                        inner_loss = learner.forward(**support_set)["loss"]
-
-                        # compute graident conflicts
-                        grads = autograd.grad(inner_loss, learner.parameters(), create_graph=False, retain_graph=False,
-                                              allow_unused=True)
-                        maml_update(learner, lr=args.inner_lr_decoder, lr_small=args.inner_lr_bert, grads=grads)
-                        #learner.adapt(inner_loss, first_order=True)
-                        del inner_loss
-                        torch.cuda.empty_cache()
-
-                        # compute graident conflicts
-                        compute_grad_conflict = mini_epoch in epochs_grad_conflict
-
-                        if (iteration + 1) % args.save_grads_every == 0 and compute_grad_conflict:  # NI
-                            new_grads = [g.detach().cpu().reshape(-1) for g in grads if
-                                         type(g) == torch.Tensor]  # filters out None grads
-                            grads_to_save = torch.hstack(new_grads).detach().cpu()  # getting all the parameters
-                            # grads_to_save = torch.cat(new_grads, dim=-1).detach().cpu()  # getting all the parameters
-                            language_grads = torch.cat([language_grads.cpu(), grads_to_save],
-                                                       dim=-1)  # Updates * grad_len in the last update
-
-
-                            del grads_to_save
-                            del new_grads
-                            torch.cuda.empty_cache()
-
-
             except StopIteration as e:
                 print(f"Exception raised - {e} in support set. Task generator is empty")
                 training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
                 task_generator = training_tasks[j]
                 support_set = next(task_generator)[0]
+
+            if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
+
+                for mini_epoch in range(UPDATES):
+                    inner_loss = learner.forward(**support_set)["loss"]
+
+                    # compute graident conflicts
+                    grads = autograd.grad(inner_loss, learner.parameters(), create_graph=False, retain_graph=False,
+                                          allow_unused=True)
+                    maml_update(learner, lr=args.inner_lr_decoder, lr_small=args.inner_lr_bert, grads=grads)
+                    wandb.log({"Inner/loss": inner_loss})
+                    #learner.adapt(inner_loss, first_order=True)
+                    del inner_loss
+                    torch.cuda.empty_cache()
+
+                    # compute graident conflicts
+                    compute_grad_conflict = mini_epoch in epochs_grad_conflict
+
+                    if (iteration + 1) % args.save_grads_every == 0 and compute_grad_conflict:  # NI
+                        new_grads = [g.detach().cpu().reshape(-1) for g in grads if
+                                     type(g) == torch.Tensor]  # filters out None grads
+                        grads_to_save = torch.hstack(new_grads).detach().cpu()  # getting all the parameters
+                        # grads_to_save = torch.cat(new_grads, dim=-1).detach().cpu()  # getting all the parameters
+                        language_grads = torch.cat([language_grads.cpu(), grads_to_save],
+                                                   dim=-1)  # Updates * grad_len in the last update
+
+
+                        del grads_to_save
+                        del new_grads
+                        torch.cuda.empty_cache()
+
 
             del support_set
             torch.cuda.empty_cache()
@@ -301,6 +305,7 @@ def main():
                 query_set = next(task_generator)[0]
 
             eval_loss = learner.forward(**query_set)["loss"]
+            wandb.log({"Eval/loss":eval_loss})
             iteration_loss += eval_loss
             del eval_loss
             del learner
@@ -326,6 +331,8 @@ def main():
         iteration_loss.backward()
         optimizer.step()
         scheduler.step()
+        wandb.log({"Iteration/loss": iteration_loss})
+
 
         # Bookkeeping
         with torch.no_grad():
@@ -365,7 +372,6 @@ def main():
     np.save(
         f"cos_matrices/{args.name}/allGrads_{args.name}_episode_upd{UPDATES}_pretrain{PRETRAIN_LAN}_suppSize{args.support_set_size}_acc_mode{args.accumulation_mode}_cos_mat{EPISODES}",
         cos_matrices)
-
 
     print("Done training ... archiving three models!")
     for i in [500, 600, 900, 1200, 1500, 1800, 2000, 1500]:

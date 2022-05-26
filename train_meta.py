@@ -34,6 +34,7 @@ from allennlp.nn.util import move_to_device
 
 from sklearn.metrics.pairwise import cosine_similarity
 #Some commennt
+from learn2learn.utils import detach_module
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -242,11 +243,11 @@ def main():
             the dataset reload issue.
         """
         num_grad_samples = min(4, UPDATES)
-        # epochs_grad_conflict = random.sample(range(UPDATES), k=num_grad_samples)  # random.randint(0, UPDATES-1)
-        epochs_grad_conflict = []
+        epochs_grad_conflict = random.sample(range(UPDATES), k=num_grad_samples)  # random.randint(0, UPDATES-1)
         for j, (task_generator, train_lang, train_lang_low) in \
                 enumerate(zip(training_tasks, train_languages, train_languages_lowercase)):
             learner = meta_m.clone(first_order=True)
+
             language_grads = torch.Tensor()
 
             try:
@@ -382,6 +383,11 @@ def main():
 
             np.save(f"{file_path_}_cos_mat{iteration}", np.array(cos_matrices))
             torch.cuda.empty_cache()
+
+        #TODO: detach here
+        detach_module(learner)
+        del learner
+
 
     cos_matrices = np.array(cos_matrices)
     print(f"[INFO]: Saving the similarity matrix with shape {cos_matrices.shape}")

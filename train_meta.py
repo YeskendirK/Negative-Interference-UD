@@ -4,7 +4,6 @@ This file Meta-Trains on 7 languages
 And validates on Bulgarian
 """
 from get_language_dataset import get_language_dataset
-# from get_language_dataset_last_year import get_language_dataset
 
 from get_default_params import get_params
 from udify import util
@@ -208,7 +207,7 @@ def main():
     if args.resume:
         model_state = torch.load(args.resume)
         meta_m.module.load_state_dict(model_state)
-    # meta_m.cuda()
+    meta_m.cuda()
     optimizer = Adam(
         [
             {
@@ -243,7 +242,8 @@ def main():
             the dataset reload issue.
         """
         num_grad_samples = min(4, UPDATES)
-        epochs_grad_conflict = random.sample(range(UPDATES), k=num_grad_samples)  # random.randint(0, UPDATES-1)
+        # epochs_grad_conflict = random.sample(range(UPDATES), k=num_grad_samples)  # random.randint(0, UPDATES-1)
+        epochs_grad_conflict = []
         for j, (task_generator, train_lang, train_lang_low) in \
                 enumerate(zip(training_tasks, train_languages, train_languages_lowercase)):
             learner = meta_m.clone(first_order=True)
@@ -258,10 +258,10 @@ def main():
                 task_generator = training_tasks[j]
                 support_set = next(task_generator)[0]
             print("SUPPORT SET metadata len = ", len(support_set['metadata']))
-            print(support_set['metadata'])
+            # print(support_set['metadata'])
             print("-"*20)
             print("-" * 20)
-            # support_set = move_to_device(support_set, device_num)
+            support_set = move_to_device(support_set, device_num)
             if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
 
                 for mini_epoch in range(UPDATES):
@@ -312,10 +312,10 @@ def main():
                 training_tasks[j] = restart_iter(train_lang, train_lang_low, args)
                 task_generator = training_tasks[j]
                 query_set = next(task_generator)[0]
-            print("QUERY SET len = ", len(query_set))
-            print(query_set)
+            print("QUERY SET len = ", len(query_set['metadata']))
+            # print(query_set)
             print("="*20)
-            # query_set = move_to_device(query_set, device_num)
+            query_set = move_to_device(query_set, device_num)
             eval_loss = learner.forward(**query_set)["loss"]
             iteration_loss += eval_loss
             del eval_loss
@@ -362,7 +362,7 @@ def main():
         torch.cuda.empty_cache()
 
         # Saving the 250th episode as oom errors are appearing in lisa
-        if iteration + 1 in [1, 10, 100, 250, 500, 1500, 2000] and not (
+        if iteration + 1 in [10, 100, 250, 500, 1500, 2000] and not (
             iteration + 1 == 500 and DOING_MAML
         ):
             backup_path = os.path.join(
@@ -393,7 +393,7 @@ def main():
 
 
     print("Done training ... archiving three models!")
-    for i in [1, 10, 100, 250, 500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
+    for i in [10, 100, 250, 500, 600, 900, 1200, 1500, 1800, 2000, 1500]:
         filename = os.path.join(MODEL_VAL_DIR, "model" + str(i) + ".th")
         if os.path.exists(filename):
             save_place = MODEL_VAL_DIR + "/" + str(i)
@@ -414,7 +414,7 @@ def main():
         subprocess.run(["mkdir", save_place])
         archive_model(
             MODEL_VAL_DIR,
-            # files_to_archive=train_params.files_to_archive,
+            files_to_archive=train_params.files_to_archive,
             archive_path=save_place,
         )
         print("BEST model archieved to save_place: ", save_place)

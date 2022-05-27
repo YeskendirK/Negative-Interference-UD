@@ -18,9 +18,7 @@
   "validation_data_path": "data/ud-treebanks-v2.3/UD_English-EWT/en_ewt-ud-dev.conllu",
   "test_data_path": "data/ud-treebanks-v2.3/UD_English-EWT/en_ewt-ud-test.conllu",
   "vocabulary": {
-    "directory_path": "data/vocab/expmix/vocabulary",
-    "non_padded_namespaces": ["upos", "xpos", "feats", "lemmas", "*tags", "*labels", "bert"]
-
+    "directory_path": "data/vocab/expmix/vocabulary"
   },
   "model": {
     "word_dropout": 0.2,
@@ -80,19 +78,20 @@
       }
     }
   },
-  "iterator": {
-    "batch_size": 16
+  "data_loader": {
+    "batch_sampler":{
+      "batch_size": 16
+    }
   },
   "trainer": {
     "num_epochs": 60,
     "patience": 40,
-    "num_serialized_models_to_keep": 1,
-    "should_log_learning_rate": true,
-    "summary_interval": 100,
+//    "num_serialized_models_to_keep": 1,
+//    "should_log_learning_rate": true,
+//    "summary_interval": 100,
     "optimizer": {
-      "type": "bert_adam",
-      "b1": 0.9,
-      "b2": 0.99,
+      "type": "adamw",
+      "betas": [0.9, 0.99],
       "weight_decay": 0.01,
       "lr": 1e-3,
       "parameter_groups": [
@@ -114,7 +113,8 @@
       "gradual_unfreezing": true,
       "discriminative_fine_tuning": true,
       "decay_factor": 0.04
-    }
+    },
+    "cuda_device": 0
   },
   "udify_replace": [
     "dataset_reader.token_indexers",

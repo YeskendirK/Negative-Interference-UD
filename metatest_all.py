@@ -175,13 +175,14 @@ def main():
 
         # Create directory and copy relevant files there for later
         SERIALIZATION_DIR = WHERE_TO_SAVE + "/resultsvalidation" + language
+        MODEL_DIR_VOCAB = 'data/vocab/expmix'
         # if os.path.exists(SERIALIZATION_DIR): continue
         # Try with 20 different batches from validation set.
         NO = 0
         for TRY in range(args.amount):
 
             subprocess.run(["mkdir", SERIALIZATION_DIR])
-            subprocess.run(["cp", "-r", MODEL_DIR + "/vocabulary", SERIALIZATION_DIR])
+            subprocess.run(["cp", "-r", MODEL_DIR_VOCAB + "/vocabulary", SERIALIZATION_DIR])
             subprocess.run(["cp", MODEL_DIR + "/config.json", SERIALIZATION_DIR])
 
             # Set up model and iterator and optimizer

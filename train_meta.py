@@ -45,7 +45,7 @@ def main():
     parser.add_argument(
         "--skip_update", default=0, type=float, help="Skip update on the support set"
     )
-    parser.add_argument("--seed", default=9999, type=int, help="Set seed")
+    parser.add_argument("--seed", default=777, type=int, help="Set seed")
     # Throwing an argparse error
     # parser.add_argument(
     #     "--skip_update", default=0, type=float, help="Skip update on the support set"
@@ -274,7 +274,7 @@ def main():
                 print("SUPPORT SET metadata len = ", len(support_set['metadata']))
                 # print(support_set['metadata'])
                 print("-"*20)
-                # support_set = move_to_device(support_set, device_num)
+                support_set = move_to_device(support_set, device_num)
                 if SKIP_UPDATE == 0.0 or torch.rand(1) > SKIP_UPDATE:
                     count_grads = 0
                     for mini_epoch in range(UPDATES):
@@ -333,11 +333,11 @@ def main():
                 print("QUERY SET len = ", len(query_set['metadata']))
                 # print(query_set)
                 print("="*20)
-                # query_set = move_to_device(query_set, device_num)
+                query_set = move_to_device(query_set, device_num)
                 # try:
                 eval_loss = learner.forward(**query_set)["loss"]
                 iteration_loss += eval_loss
-                del eval_loss
+                # del eval_loss
                 # except RuntimeError as e:
                 #     print(f"Exception raised computing eval_loss in learner.forward() -  {e}")
                 #     print(f"WARNING: ran out of memory, skipping batch  at episode {iteration}\n", flush=True)

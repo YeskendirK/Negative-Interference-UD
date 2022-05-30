@@ -137,7 +137,7 @@ def get_language_dataset(
                 "test_data_path": testpath,
                 "vocabulary": {
                     "directory_path": os.path.join(
-                        "data/concat-exp-mix/vocab/concat-exp-mix/vocabulary"
+                        "data/vocab/expmix/vocabulary"
                     )
                 },
                 "iterator": iterator_params,

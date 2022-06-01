@@ -16,12 +16,12 @@ train_languages = [
 train_languages_readable = [
     "Arabic",
     "Czech",
-    "English",
-    "Hindi",
     "Italian",
-    "Korean",
     "Norwegian",
+    "English",
     "Russian",
+    "Hindi",
+    "Korean",
 ]
 
 train_languages_lowercase = [

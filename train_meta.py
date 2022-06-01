@@ -68,6 +68,7 @@ def main():
                         type=bool, help="Skip Italian as a task")
     parser.add_argument("--notaddczech", default=False,
                         type=bool, help="Skip Czech as a task")
+    parser.add_argument('--notaddnorwegian', default=False, type=bool, help="Skip norwegian as a task")
 
     parser.add_argument("--episodes", default=900,
                         type=int, help="Amount of episodes")
@@ -115,6 +116,7 @@ def main():
     hindi_indices = [0, 1, 2, 3, 4, 6]
     italian_indices = [0, 1, 3, 4, 5, 6]
     czech_indices = [0, 2, 3, 4, 5, 6]
+    norwegian_indices = [0, 1, 2, 4, 5, 6]
     if args.notaddhindi:
         train_languages = train_languages[hindi_indices]
         train_languages_lowercase = train_languages_lowercase[hindi_indices]
@@ -124,6 +126,9 @@ def main():
     elif args.notadditalian:
         train_languages = train_languages[italian_indices]
         train_languages_lowercase = train_languages_lowercase[italian_indices]
+    elif args.notaddnorwegian:
+        train_languages = train_languages[norwegian_indices]
+        train_languages_lowercase = train_languages_lowercase[norwegian_indices]
 
     for lan, lan_l in zip(train_languages, train_languages_lowercase):
         training_tasks.append(get_language_dataset(

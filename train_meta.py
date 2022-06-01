@@ -141,6 +141,10 @@ def main():
                 support_set_size=args.support_set_size,
             )
         )
+        train_languages = list(train_languages)
+        train_languages.append("UD_English-EWT")
+        train_languages_lowercase = list(train_languages_lowercase)
+        train_languages_lowercase.append("en_ewt-ud")
     UPDATES = args.updates
     EPISODES = args.episodes
     INNER_LR_DECODER = args.inner_lr_decoder

@@ -1,6 +1,8 @@
 # Measuring Negative Interference in Cross-Lingual Adaptation in Dependency Parsing
 This repo is the project to measure negative interference in a multilingual meta-learning setup for the task of dependency parsing. 
-We built upon the paper [Meta-learning for fast cross-lingual adaptation in dependency parsing](https://arxiv.org/abs/2104.04736) and the codebase of Udify.
+
+We built upon the paper [Meta-learning for fast cross-lingual adaptation in dependency parsing](https://arxiv.org/abs/2104.04736) and [On Negative Interference in Multilingual Models:
+Findings and A Meta-Learning Treatment]() along the codebase of Udify. 
 
 # Environment Setup
 Ideally setup a conda environment and install all the requirements. jobfiles folder consist of all the required .sh files to run on Lisa. 

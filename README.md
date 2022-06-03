@@ -1,52 +1,77 @@
-# Meta-Learning for UD parsing
-Code for the paper ["Meta-learning for fast cross-lingual adaptation in dependency parsing"](https://arxiv.org/abs/2104.04736), to be published in [ACL 2022](https://www.2022.aclweb.org/papers).  
+# Measuring Negative Interference in Cross-Lingual Adaptation in Dependency Parsing
+This repo is the project to measure negative interference in a multilingual meta-learning setup for the task of dependency parsing. 
+We built upon the paper [Meta-learning for fast cross-lingual adaptation in dependency parsing](https://arxiv.org/abs/2104.04736) and the codebase of Udify.
 
-This codebase extends UDify with Model-Agnostic Meta-Learning. 
+# Environment Setup
+Ideally setup a conda environment and install all the requirements. jobfiles folder consist of all the required .sh files to run on Lisa. 
+Use lisaatcs.job to setup your environment.
 
-# Training process
-## Pre-training
-The code for pre-training can be found in `pretrain.py`. 
-It is vital that the entire vocabulary is used during pre-training (that is, vocabulary of all languages you would later want to train or test on.). The treebanks of relevant languages can be concatenated using UDify's `concat_treebanks.py`.
+# Downloading Dataset and Setting up Project
+Create the directory for the data in `Negative-Interference-UD`:
+```
+mkdir -p data/ud-treebanks-v2.3
+mkdir -p data/exp-mix
+mkdir -p data/concat-exp-mix
+```
 
-After pre-training, the model directory can be passed to a meta-learner or a non-episodic learner: 
+Navigate back to the `metalearning` directory (`cd ..`) and download the data.
+```
+bash ./scripts/download_ud_data.sh
+```
+It seems that `download_ud_data.sh` not only downloads the data but also creates a treebank for all languages.
 
-## Meta-Learning
-All code for the meta-training process can be found in `train_meta.py`. 
+Run a script that copies treebanks of all languages used in her paper (based on Table 7). You can run it in the root metalearning directory.
+```
+python scripts/make_expmix_folder.py
+```
 
-## Non-Episodic Learning
-All code for the meta-training process can be found in `train_nonepisodic.py`. 
+Afterward, you can just pass the name of the folder with all these treebanks to concatenate them. `concat_treebanks.py` needs imports Udify's `util.py` which imports stuff like torch, so we need to run `concat_treebanks.py` in a batch script. For that, you can use `concat_treebanks.sh`. Run it from the root directory of metalearning with the command:
 
-# Evaluation 
-There are multiple ways to evaluate the models.
-Code for meta-testing / meta-validation is defined in `metatest_all.py`.
-This will create json files using aggregates of all relevant scores.
+```
+sbatch concat_treebanks.sh
+```
 
-# Analysis
-The code for non-projectiveness can be seen in `projective.py`.
+After concatenating treebanks of all relevant languages, create the vocabulary (around 15 minutes):
+```
+sbatch create_vocabs.sh
+```
 
-# UDify and data
-See the original UDify README for more info: https://github.com/Hyperparticle/udify
+Refer to the config file 'config/ud/en/udify_bert_finetune_en_ewt.json' to change to proper vocabulary path as Udify copies the vocabulary in multiple places through the train and test process.
 
-In particular, see the update to newer allennlp (which used pytorch dataloaders) from last summer (after all of our struggles) in this PR https://github.com/tamuhey/udify/pull/1, but I haven't looked at this yet, so this code still runs on the old allennlp version.
+## Training Pipeline
 
-Data can be downloaded with script in `scripts` folder, or directly from https://universaldependencies.org/. We used UD v2.3 for our experiments.
+# Pre-train mBert
+We use many pre-training languages. Example job files are present in 'jobfiles/' directory.
 
-# Examples 
-An example of how to run the code when you have pretrained a model with `pretrain.py` and put it into directory `pretrained/pretrained_hindi`: 
+As an example to finetune on Hindi run `hindipretrain.job`. Refer to the paper for parameters and do not forget to change the 'path' in the respective config file. 
 
-`python train_meta.py --name hindi --notaddhindi True --addenglish True --inner_lr_decoder 0.0001 --inner_lr_bert 1e-05 --meta_lr_decoder 0.0007 --meta_lr_bert 1e-05 --updates 20 --episodes 500 --seed 19 --support_set_size 20 --model_dir pretrained/pretrained_hindi` 
+## Setup meta-learning and cosine similarity calculation
 
-This will save a model to the directory `saved_models/XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi`, we can meta-validate using this script:
+1. Add pytorch and other libs to env if they weren't added before.
+2. Check your unique path to the pre-trained mBERT generated from pretraining. Check the 'logs/' folder for generated logs.
+3. Fine-tuning process creates a file `model.tar.gz` and other metadata including best.th.(Note: some of the branches might not have this updated, so ensure that the model.tar.gz is zipped in the same location' and rename the `weights.th` into `best.th` with `mv weights.th best.th`) 
+4. Modify `train_meta.sh` to use the correct --model_dir from your pretraining. Change the flags as desired. With default parameters, it takes around 20 hours.
+5. As an example run `hindimetatrain.sh` for the hindi pre-trained model
+6. The numpy array containing gradient similarities is located in `cos_matrices`. The checkpoint gradient similarities are saved every `save_every` parameter.
 
-`python metatest_all.py --validate True --lr_decoder 0.0001 --lr_bert 1e-05 --updates 20 --support_set_size 20 --optimizer sgd --seed 3 --episode 500 --model_dir saved_models/XMAML_0.0001_1e-05_0.0007_1e-05_20_19hindi`
 
+**NOTE:** It is not possible to run the full training with a GPU with less than **24GB** of memory! So when using Lisa we need to use the RTX titan. The job file already uses this (_gpu_titanrtx_shared_course_). Even with GPU equipped with 24GB memory OOM errors might occur! 
 
-# Requirements
+### Evaluation and Meta-testing
 
-These libraries were modified:
+To do evaluation or Meta-testing we use the script `metatest_all.py`. It will generate a folder like `metavalidation_0.0001_1e-05_20_20_sgd_saved_models-XMAML_0.001_0.001_0.001_0.001_5_9999_1` with the scores in json files.
 
-- `learn2learn` (Necessary code in `ourmaml.py`, which is the wrapper for MAML around UDify, adapted for different learning rates with SGD in the inner loop)
+### Evaluation
 
-- `udify` (See directory/commit history, minor tweaks with utf-8 encoding and parsing dependency trees while loading data)
+Run `python metatest_all.py --validate True --lr_decoder 0.0001 --lr_bert 1e-04 --updates 20 --support_set_size 20 --optimizer sgd --seed 3 --episode 500 --model_dir saved_models/XMAML_0.0005_5e-05_0.0005_5e-05_20_9999`  where the path for `--model_dir` was created after running `train_meta.py` and the filepath corresponds to the params of the run.  _This can be done without the RTX gpu._
 
-- `allennlp==0.9.0` Unfortunately this code depends on a previous version of allennlp (See directory/commit history, minor tweaks with utf-8 encoding + UDify model)
+### Meta-testing
+
+For this, we will need the tiny-treebanks split for cross-validation. Run `python split_files_tiny_auto.py` and it will take care of making the test files. 
+We run the same command as for validation but without the --validate flag. `python metatest_all.py --lr_decoder 0.0001 --lr_bert 1e-04 --updates 20 --support_set_size 20 --optimizer sgd --seed 3 --episode 500 --model_dir saved_models/XMAML_0.0005_5e-05_0.0005_5e-05_20_9999
+`  
+_Need more than 8gb of gpu memory._
+
+### Quick Results
+
+You can visualize the gradient conflicts generated in the cos_matrices directory. Use _visualize.ipynb_ to generate conflict graph and epoch level gradient information.
